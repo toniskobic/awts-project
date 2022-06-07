@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>NWTIS konfiguracija</comment>
+<entry key="server.database">jdbc:mysql://localhost/</entry>
+<entry key="admin.username">nwtis_admin</entry>
+<entry key="admin.password">nwtis_foi</entry>
+<entry key="admin.database">nwtis_g1</entry>
+<entry key="user.username">nwtis_g1</entry>
+<entry key="user.password">nwtis#g1</entry>
+<entry key="user.database">nwtis_g1</entry>
+<entry key="jdbc.mysql">com.mysql.cj.jdbc.Driver</entry>
+<entry key="jdbc.derby">org.apache.derby.jdbc.ClientDriver</entry>
+<entry key="jdbc.hsqldb.hsql">org.hsqldb.jdbcDriver</entry>
+</properties>
