@@ -1,0 +1,5 @@
+#NWTiS 2022.
+#Tue Mar 09 15:22:47 CET 2022
+port=8003
+maks.cekaca=10
+maks.cekanje=1800000
