@@ -28,11 +28,9 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>libs/</classpathPrefix>
-							<!--
 							<mainClass>
- 								org.foi.nwtis.tskobic.zadaca_1.ServerGlavni
+ 								org.foi.nwtis.tskobic.aplikacija_1.ServerGlavni
  							</mainClass>
- 							 -->
 						</manifest>
 					</archive>
 				</configuration>
