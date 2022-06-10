@@ -3,3 +3,4 @@
 port=8003
 maks.cekaca=10
 maks.cekanje=1800000
+broj.dretvi=5
