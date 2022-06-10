@@ -9,6 +9,15 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
+
+	<repositories>
+		<repository>
+			<id>NWTiS</id>
+			<name>NWTiS</name>
+			<url>http://nwtis.foi.hr:8088/repository/NWTiS_2022/</url>
+		</repository>
+	</repositories>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -67,6 +76,7 @@
 		</plugins>
 	</build>
 	<dependencies>
+
 		<dependency>
 			<groupId>org.foi.nwtis.tskobic</groupId>
 			<artifactId>tskobic-lib_03_1</artifactId>
@@ -76,6 +86,16 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.22</version>
+		</dependency>
+		<dependency>
+			<groupId>org.foi.nwtis</groupId>
+			<artifactId>NWTiS_REST_lib</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.9.0</version>
 		</dependency>
 	</dependencies>
 </project>
