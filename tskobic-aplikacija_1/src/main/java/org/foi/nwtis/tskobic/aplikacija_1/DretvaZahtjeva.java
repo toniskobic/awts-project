@@ -3,6 +3,7 @@ package org.foi.nwtis.tskobic.aplikacija_1;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.Charset;
 import java.util.regex.Matcher;
@@ -22,6 +23,8 @@ public class DretvaZahtjeva extends Thread {
 
 	/** naziv dretve. */
 	String nazivDretve;
+	
+	ServerSocket ss = null;
 
 	/** Objekt klase ServerGlavni. */
 	ServerGlavni serverGlavni = null;
@@ -51,12 +54,13 @@ public class DretvaZahtjeva extends Thread {
 	 * @param konfig       konfiguracijski podaci
 	 * @param veza         veza
 	 */
-	public DretvaZahtjeva(ServerGlavni serverGlavni, Konfiguracija konfig, Socket veza) {
+	public DretvaZahtjeva(ServerGlavni serverGlavni, Konfiguracija konfig, Socket veza, ServerSocket ss) {
 		super("tskobic_" + (brojAktivnihDretvi + 1));
 		this.serverGlavni = serverGlavni;
 		this.nazivDretve = super.getName();
 		this.konfig = konfig;
 		this.veza = veza;
+		this.ss = ss;
 		synchronized (this) {
 			brojAktivnihDretvi++;
 		}
@@ -106,10 +110,15 @@ public class DretvaZahtjeva extends Thread {
 	 * @param komanda omanda
 	 */
 	public void obradaZahtjeva(OutputStreamWriter osw, String komanda) {
-		if (provjeraSintakseObrada(komanda, status)) {
-			ispisPoruke(osw, "SVE U REDU");
-		} else if (provjeraSintakseObrada(komanda, ocisti)) {
-			ispisPoruke(osw, "SVE U REDU");
+		if (provjeraSintakseObrada(komanda, prekid)) {
+			ispisPoruke(osw, "OK");
+			interrupt();
+		} else if (provjeraSintakseObrada(komanda, status)) {
+			int status;
+			synchronized (this) {
+				status = statusPosluzitelja;
+			}
+			ispisPoruke(osw, "OK " + status);
 		}  else {
 			ispisPoruke(osw, "ERROR 40 Sintaksa komande nije uredu.");
 		}
@@ -150,6 +159,13 @@ public class DretvaZahtjeva extends Thread {
 	 */
 	@Override
 	public void interrupt() {
+		synchronized (this) {
+			serverGlavni.radi = false;
+			try {
+				this.ss.close();
+			} catch (IOException e) {
+			}
+		}
 		super.interrupt();
 	}
 
