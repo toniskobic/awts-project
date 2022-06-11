@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.foi.nwtis.tskobic.vjezba_03.konfiguracije.Konfiguracija;
 import org.foi.nwtis.tskobic.vjezba_03.konfiguracije.KonfiguracijaApstraktna;
@@ -27,6 +25,8 @@ public class ServerGlavni {
 
 	/** veza. */
 	Socket veza = null;
+
+	boolean radi = true;
 
 	/** konfiguracijski podaci. */
 	public Konfiguracija konfig = null;
@@ -67,16 +67,17 @@ public class ServerGlavni {
 
 		try (ServerSocket ss = new ServerSocket(this.port, this.maksCekaca)) {
 			ss.setSoTimeout(maksCekanje);
-			while (true) {
+			while (radi) {
+				if (!radi) {
+					break;
+				}
 				this.veza = ss.accept();
 
-				DretvaZahtjeva dretvaZahtjeva = new DretvaZahtjeva(this, konfig, veza);
+				DretvaZahtjeva dretvaZahtjeva = new DretvaZahtjeva(this, konfig, veza, ss);
 				dretvaZahtjeva.start();
 			}
 		} catch (IOException ex) {
-			Logger.getLogger(ServerGlavni.class.getName()).log(Level.SEVERE, null, ex);
 		}
-
 	}
 
 	/**
