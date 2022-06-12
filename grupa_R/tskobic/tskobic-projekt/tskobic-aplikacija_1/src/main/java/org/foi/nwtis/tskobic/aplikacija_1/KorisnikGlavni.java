@@ -92,7 +92,8 @@ public class KorisnikGlavni {
 
 		KorisnikGlavni kg = new KorisnikGlavni();
 
-		kg.komanda = args[0];
+		
+		kg.komanda = "DISTANCE GOVN LOWW";
 		kg.adresa = "localhost";
 
 		kg.port = 8003;

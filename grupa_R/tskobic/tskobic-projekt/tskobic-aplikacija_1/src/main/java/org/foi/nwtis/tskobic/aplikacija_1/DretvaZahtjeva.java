@@ -3,13 +3,21 @@ package org.foi.nwtis.tskobic.aplikacija_1;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.StringReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.foi.nwtis.podaci.Aerodrom;
 import org.foi.nwtis.tskobic.vjezba_03.konfiguracije.Konfiguracija;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 
 /**
  * Klasa dretva DretvaZahtjeva.
@@ -21,9 +29,11 @@ public class DretvaZahtjeva extends Thread {
 
 	private volatile static int statusPosluzitelja = 0;
 
+	static volatile List<Aerodrom> aerodromi = new ArrayList<>();
+
 	/** naziv dretve. */
 	String nazivDretve;
-	
+
 	ServerSocket ss = null;
 
 	/** Objekt klase ServerGlavni. */
@@ -41,7 +51,7 @@ public class DretvaZahtjeva extends Thread {
 
 	String inicijalizacija = "^INIT$";
 
-	String ucitavanje = "^LOAD$";
+	String ucitavanje = "^LOAD(.*)$";
 
 	String udaljenostIcao = "^DISTANCE ([A-Z]{4}) ([A-Z]{4})$";
 
@@ -107,7 +117,7 @@ public class DretvaZahtjeva extends Thread {
 	 * Obrada zahtjeva.
 	 *
 	 * @param osw     izlazni tok podataka
-	 * @param komanda omanda
+	 * @param komanda komanda
 	 */
 	public void obradaZahtjeva(OutputStreamWriter osw, String komanda) {
 		if (provjeraSintakseObrada(komanda, prekid)) {
@@ -119,8 +129,34 @@ public class DretvaZahtjeva extends Thread {
 				status = statusPosluzitelja;
 			}
 			ispisPoruke(osw, "OK " + status);
-		}  else {
-			ispisPoruke(osw, "ERROR 40 Sintaksa komande nije uredu.");
+		} else if (provjeraSintakseObrada(komanda, inicijalizacija)) {
+			synchronized (this) {
+				statusPosluzitelja = 1;
+			}
+		} else if (provjeraSintakseObrada(komanda, ucitavanje)) {
+			String aero = komanda.substring(5);
+			int aeroUneseni;
+
+			Gson gson = new Gson();
+			JsonReader citac = new JsonReader(new StringReader(aero.trim()));
+			citac.setLenient(true);
+
+			synchronized (aerodromi) {
+				aerodromi.addAll(gson.fromJson(citac, new TypeToken<List<Aerodrom>>() {
+				}.getType()));
+
+				aeroUneseni = aerodromi.size();
+			}
+			ispisPoruke(osw, "OK " + aeroUneseni);
+		} else if (provjeraSintakseObrada(komanda, udaljenostIcao)) {
+			izvrsiUdaljenostIcao(osw, komanda);
+		} else if (provjeraSintakseObrada(komanda, ocisti)) {
+			synchronized (this) {
+				aerodromi.clear();
+				statusPosluzitelja = 0;
+			}
+		} else {
+			ispisPoruke(osw, "ERROR 14 Sintaksa komande nije uredu.");
 		}
 	}
 
@@ -167,6 +203,68 @@ public class DretvaZahtjeva extends Thread {
 			}
 		}
 		super.interrupt();
+	}
+
+	/**
+	 * Izvršavanje naredbe udaljenost icao.
+	 *
+	 * @param osw     izlazni tok podataka
+	 * @param komanda komanda
+	 */
+	private void izvrsiUdaljenostIcao(OutputStreamWriter osw, String komanda) {
+		String p[] = komanda.split(" ");
+		String icao1 = p[1];
+		String icao2 = p[2];
+
+		String odgovor = "";
+
+		Aerodrom aerodrom1 = null;
+		Aerodrom aerodrom2 = null;
+
+		synchronized (aerodromi) {
+			aerodrom1 = aerodromi.stream().filter(a -> a.getIcao().equals(icao1)).findAny().orElse(null);
+			aerodrom2 = aerodromi.stream().filter(a -> a.getIcao().equals(icao2)).findAny().orElse(null);
+		}
+		
+		if (aerodrom1 == null && aerodrom2 == null) {
+			ispisPoruke(osw, "ERROR 13 Ne postoje aerodromi " + icao1 + " i " + icao2 + " u kolekciji.");
+		} else if (aerodrom1 == null) {
+			ispisPoruke(osw, "ERROR 11 Ne postoji aerodrom " + icao1 + " u kolekciji.");
+		} else if (aerodrom2 == null) {
+			ispisPoruke(osw, "ERROR 12 Ne postoji aerodrom " + icao2 + " u kolekciji.");
+		} else {
+			double udaljenost = (double) udaljenost(Float.valueOf(aerodrom1.getLokacija().getLatitude()),
+					Float.valueOf(aerodrom1.getLokacija().getLongitude()),
+					Float.valueOf(aerodrom2.getLokacija().getLatitude()),
+					Float.valueOf(aerodrom2.getLokacija().getLongitude()));
+
+			odgovor = "OK " + (int) Math.round(udaljenost);
+
+			ispisPoruke(osw, odgovor);
+		}
+
+	}
+
+	/**
+	 * Izračunava udaljenost između dvije koordinate.
+	 *
+	 * @param gs1 geografska širina prve lokacije
+	 * @param gd1 geografska duljina prve lokacije
+	 * @param gs2 geografska širina druge lokacije
+	 * @param gd2 geograska duljina druge lokacije
+	 * @return udaljenost
+	 */
+	private float udaljenost(float gs1, float gd1, float gs2, float gd2) {
+		double polumjerZemlje = 6371000;
+		double dGs = Math.toRadians(gs2 - gs1);
+		double dGd = Math.toRadians(gd2 - gd1);
+		double a = Math.sin(dGs / 2) * Math.sin(dGs / 2)
+				+ Math.cos(Math.toRadians(gs1)) * Math.cos(Math.toRadians(gs2)) * Math.sin(dGd / 2) * Math.sin(dGd / 2);
+		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+		float udalj = (float) (polumjerZemlje * c);
+		udalj = udalj / 1000;
+
+		return udalj;
 	}
 
 	/**
