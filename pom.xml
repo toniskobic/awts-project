@@ -14,10 +14,9 @@
 	<modules>
 		<module>tskobic-lib_03_1</module>
 		<module>tskobic-lib_06_1</module>
-		
-		<!-- 
 		<module>tskobic-aplikacija_1</module>
 		<module>tskobic-aplikacija_2</module>
+		<!-- 
 		<module>tskobic-aplikacija_3</module>
 		<module>tskobic-aplikacija_4</module>
 		<module>tskobic-aplikacija_5</module>
