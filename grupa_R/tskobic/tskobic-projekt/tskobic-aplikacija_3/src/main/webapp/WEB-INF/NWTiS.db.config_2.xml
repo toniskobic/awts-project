@@ -16,11 +16,4 @@
 <entry key="OpenWeatherMap.apikey"></entry>
 <entry key="OpenSkyNetwork.korisnik"></entry>
 <entry key="OpenSkyNetwork.lozinka"></entry>
-<entry key="ciklus.vrijeme">300</entry>
-<entry key="ciklus.korekcija">10</entry>
-<entry key="preuzimanje.odmak">3</entry>
-<entry key="preuzimanje.pauza">20</entry>
-<entry key="preuzimanje.od">14.01.2022</entry>
-<entry key="preuzimanje.do">31.12.2022</entry>
-<entry key="preuzimanje.vrijeme">6</entry>
 </properties>
