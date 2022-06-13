@@ -6,9 +6,6 @@ import java.io.OutputStreamWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.charset.Charset;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Klasa za klijenta KorisnikGlavni.
@@ -92,8 +89,14 @@ public class KorisnikGlavni {
 
 		KorisnikGlavni kg = new KorisnikGlavni();
 
-		
-		kg.komanda = "DISTANCE GOVN LOWW";
+		if (args.length == 1) {
+			kg.komanda = args[0];
+		} else if (args.length == 2) {
+			kg.komanda = args[0] + " " + args[1];
+		} else if (args.length == 3) {
+			kg.komanda = args[0] + " " + args[1] + " " + args[2];
+		}
+
 		kg.adresa = "localhost";
 
 		kg.port = 8003;
