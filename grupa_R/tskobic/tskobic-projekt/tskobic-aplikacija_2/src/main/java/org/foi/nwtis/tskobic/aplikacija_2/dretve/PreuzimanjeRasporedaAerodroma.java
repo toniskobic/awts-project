@@ -137,11 +137,11 @@ public class PreuzimanjeRasporedaAerodroma extends Thread {
 		long vrijemeSpavanja = 0;
 		int broj = 0;
 
-		while (!kraj && vrijemeObrade < preuzimanjeDo ) {
+		while (!kraj && vrijemeObrade < preuzimanjeDo) {
 			List<Aerodrom> aerodromi = aerodromiPraceniDAO.dohvatiPraceneAerodrome(konfig);
-			
+
 			brojCiklusa++;
-			pocetakEfektivnogRada = ZonedDateTime.now().toInstant().toEpochMilli();
+			pocetakEfektivnogRada = System.currentTimeMillis();
 
 			vrijemeDohvata = vrijemeObrade + (preuzimanjeVrijeme * 3600 * 1000);
 			if (vrijemeDohvata > preuzimanjeDoKorekcija) {
@@ -212,19 +212,19 @@ public class PreuzimanjeRasporedaAerodroma extends Thread {
 					}
 				}
 
-				vrijemeEfektivnogRada = ZonedDateTime.now().toInstant().toEpochMilli() - pocetakEfektivnogRada;
+				vrijemeEfektivnogRada = System.currentTimeMillis() - pocetakEfektivnogRada;
 				vrijemeRadaISpavanja += vrijemeEfektivnogRada;
 				broj = brojCiklusa(vrijemeEfektivnogRada);
 
 				brojVirtualnogCiklusa += broj;
-				
+
 				vrijemeSpavanja = brojCiklusa != 0 && brojCiklusa % ciklusKorekcija == 0
 						? brojVirtualnogCiklusa * ciklusVrijeme - vrijemeRadaISpavanja
 						: broj * ciklusVrijeme - vrijemeEfektivnogRada;
 
 			}
-			
-			if(kraj) {
+
+			if (kraj) {
 				break;
 			}
 
@@ -232,7 +232,7 @@ public class PreuzimanjeRasporedaAerodroma extends Thread {
 				Thread.sleep(vrijemeSpavanja);
 			} catch (IllegalArgumentException | InterruptedException e) {
 			}
-			
+
 			this.vrijemeObrade = vrijemeDohvata;
 		}
 	}
@@ -261,16 +261,17 @@ public class PreuzimanjeRasporedaAerodroma extends Thread {
 			e.printStackTrace();
 		}
 		long milisekunde = date.getTime();
-//		long sekunde = TimeUnit.MILLISECONDS.toSeconds(milisekunde);
 
 		return milisekunde;
 	}
 
 	public int brojCiklusa(long efektivnoVrijeme) {
-		int i;
-		for (i = 1; efektivnoVrijeme > (this.ciklusVrijeme * i); i++) {
-			
+		int i = 1;
+
+		while (efektivnoVrijeme > (ciklusVrijeme * i)) {
+			i++;
 		}
+
 		return i;
 	}
 
