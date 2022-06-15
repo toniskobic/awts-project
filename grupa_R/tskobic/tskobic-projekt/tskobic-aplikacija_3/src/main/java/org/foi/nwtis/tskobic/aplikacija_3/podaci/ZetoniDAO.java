@@ -6,12 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,7 +42,6 @@ public class ZetoniDAO {
 
 				s.executeUpdate();
 				ResultSet rs = s.getGeneratedKeys();
-
 				if (rs.next()) {
 					return new Zeton(rs.getInt(1), korisnik, 1, vrijemeKreiranja.toString(), vrijemeIsteka.toString());
 				}
@@ -55,14 +54,60 @@ public class ZetoniDAO {
 		} catch (ClassNotFoundException ex) {
 			Logger.getLogger(ZetoniDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
+	
+		return null;
+	}
+	
+	public List<Zeton> dohvatiAktivneZetone(String unos, PostavkeBazaPodataka pbp) {
+		String url = pbp.getServerDatabase() + pbp.getUserDatabase();
+		String bpkorisnik = pbp.getUserUsername();
+		String bplozinka = pbp.getUserPassword();
+		String upit = "SELECT * FROM zeton where korisnik = ? AND status = 1;";
+		
+		try {
+			Class.forName(pbp.getDriverDatabase(url));
+			
+            List<Zeton> aktivniZetoni = new ArrayList<>();		
+
+			try (Connection con = DriverManager.getConnection(url, bpkorisnik, bplozinka);
+					PreparedStatement s = con.prepareStatement(upit)) {
+
+				s.setString(1, unos);
+
+				ResultSet rs = s.executeQuery();
+
+				while (rs.next()) {
+					String vrijemeIsteka = rs.getString("vrijemeIsteka");
+					long vrijeme = izvrsiDatumPretvaranje(vrijemeIsteka);
+			    	long trenutnoVrijeme = new Date().getTime();
+					
+					if (trenutnoVrijeme <= vrijeme) {
+						int id = rs.getInt("id");
+						String korisnik = rs.getString("korisnik");
+						int status = rs.getInt("status");
+						String vrijemeKreiranja = rs.getString("vrijemeKreiranja");
+						Zeton zeton = new Zeton(id, korisnik, status, vrijemeKreiranja, vrijemeIsteka);
+						
+						aktivniZetoni.add(zeton);
+					}
+				} 
+				
+				return aktivniZetoni;				
+			} catch (SQLException ex) {
+				Logger.getLogger(ZetoniDAO.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(ZetoniDAO.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
 		return null;
 	}
 
-	public boolean provjeriVlasnistvoZetona(String zeton, String korisnik, PostavkeBazaPodataka pbp) {
+	public Zeton dohvatiZeton(String unos, PostavkeBazaPodataka pbp) {
 		String url = pbp.getServerDatabase() + pbp.getUserDatabase();
 		String bpkorisnik = pbp.getUserUsername();
 		String bplozinka = pbp.getUserPassword();
-		String upit = "SELECT korisnik FROM zeton WHERE id = ? and korisnik = ?;";
+		String upit = "SELECT * FROM zeton WHERE id = ?;";
 
 		try {
 			Class.forName(pbp.getDriverDatabase(url));
@@ -70,15 +115,21 @@ public class ZetoniDAO {
 			try (Connection con = DriverManager.getConnection(url, bpkorisnik, bplozinka);
 					PreparedStatement s = con.prepareStatement(upit)) {
 
-				s.setString(1, zeton);
-				s.setString(2, korisnik);
+				s.setString(1, unos);
 
 				ResultSet rs = s.executeQuery();
 
-				if (rs.next()) {
-					return true;
+				if (!rs.next()) {
+					return null;
 				} else {
-					return false;
+					int id = rs.getInt("id");
+					String korisnik = rs.getString("korisnik");
+					int status = rs.getInt("status");
+					String vrijemeKreiranja = rs.getString("vrijemeKreiranja");
+					String vrijemeIsteka = rs.getString("vrijemeIsteka");
+					Zeton zeton = new Zeton(id, korisnik, status, vrijemeKreiranja, vrijemeIsteka);
+
+					return zeton;
 				}
 			} catch (SQLException ex) {
 				Logger.getLogger(ZetoniDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -87,91 +138,66 @@ public class ZetoniDAO {
 			Logger.getLogger(ZetoniDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
-		return false;
+		return null;
 	}
-
-	public boolean provjeriVrijemeZetona(String zeton, PostavkeBazaPodataka pbp) {
+	
+	public boolean promijeniStatusZetona(int unos, String token, PostavkeBazaPodataka pbp) {
 		String url = pbp.getServerDatabase() + pbp.getUserDatabase();
 		String bpkorisnik = pbp.getUserUsername();
 		String bplozinka = pbp.getUserPassword();
-		String upit = "SELECT vrijemeIsteka FROM zeton WHERE id = ?;";
-
+		String upit = "UPDATE zeton SET status = ? WHERE id = ?;";
+		
 		try {
 			Class.forName(pbp.getDriverDatabase(url));
 
 			try (Connection con = DriverManager.getConnection(url, bpkorisnik, bplozinka);
 					PreparedStatement s = con.prepareStatement(upit)) {
 
-				s.setString(1, zeton);
+				s.setInt(1, unos);
+				s.setString(2, token);
 
-				ResultSet rs = s.executeQuery();
+				int brojAzuriranja = s.executeUpdate();
 
-				if (rs.next()) {
-					String vrijemeIsteka = rs.getString(1);
-					long vrijeme = izvrsiDatumPretvaranje(vrijemeIsteka);
-					long trenutnoVrijeme = new Date().getTime();
+				return brojAzuriranja == 1;
 
-					if (trenutnoVrijeme <= vrijeme) {
-						return true;
-					} else {
-						return false;
-					}
-
-				} else {
-					return false;
-				}
-			} catch (SQLException ex) {
-				Logger.getLogger(ZetoniDAO.class.getName()).log(Level.SEVERE, null, ex);
+			} catch (Exception ex) {
+				Logger.getLogger(AerodromiPraceniDAO.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(ZetoniDAO.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(AerodromiPraceniDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
-
+		
 		return false;
 	}
 	
-	public boolean provjeriAktivnostZetona(String zeton, PostavkeBazaPodataka pbp) {
+	public boolean promijeniStatusZetona(int unos, String token, PostavkeBazaPodataka pbp, Connection con) {
 		String url = pbp.getServerDatabase() + pbp.getUserDatabase();
-		String bpkorisnik = pbp.getUserUsername();
-		String bplozinka = pbp.getUserPassword();
-		String upit = "SELECT status, vrijemeIsteka FROM zeton WHERE id = ?;";
-
+		String upit = "UPDATE zeton SET status = ? WHERE id = ?;";
+		
 		try {
 			Class.forName(pbp.getDriverDatabase(url));
 
-			try (Connection con = DriverManager.getConnection(url, bpkorisnik, bplozinka);
-					PreparedStatement s = con.prepareStatement(upit)) {
+			try (PreparedStatement s = con.prepareStatement(upit)) {
 
-				s.setString(1, zeton);
+				s.setInt(1, unos);
+				s.setString(2, token);
 
-				ResultSet rs = s.executeQuery();
+				int brojAzuriranja = s.executeUpdate();
 
-				if (rs.next()) {
-					int status = rs.getInt(1);
-					String vrijemeIsteka = rs.getString(2);
-					long vrijeme = izvrsiDatumPretvaranje(vrijemeIsteka);
-					long trenutnoVrijeme = new Date().getTime();
+				return brojAzuriranja == 1;
 
-					if (status == 1 && trenutnoVrijeme <= vrijeme) {
-						return true;
-					} else {
-						return false;
-					}
-
-				} else {
-					return false;
-				}
-			} catch (SQLException ex) {
-				Logger.getLogger(ZetoniDAO.class.getName()).log(Level.SEVERE, null, ex);
+			} catch (Exception ex) {
+				Logger.getLogger(AerodromiPraceniDAO.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(ZetoniDAO.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(AerodromiPraceniDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
-
+		
 		return false;
 	}
-
-	public long izvrsiDatumPretvaranje(String datum) {
+	
+	
+	private long izvrsiDatumPretvaranje(String datum) {
 	    long millisSinceEpoch = LocalDateTime.parse(datum, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
 	            .atZone(ZoneId.systemDefault())
 	            .toInstant()
@@ -179,4 +205,5 @@ public class ZetoniDAO {
 	    
 	    return millisSinceEpoch;
 	}
+
 }
