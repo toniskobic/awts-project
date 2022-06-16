@@ -30,7 +30,7 @@ public class ServerGlavni {
 
 	/** Broj aktivnih dretvi. */
 	volatile int brojAktivnihDretvi = 0;
-	
+
 	/** Maksimalan broj dozvoljenih dretvi. */
 	int maksBrojDretvi;
 
@@ -89,10 +89,10 @@ public class ServerGlavni {
 				if (!radi) {
 					break;
 				}
-				
+
 				if (brojAktivnihDretvi < maksBrojDretvi) {
 					this.veza = ss.accept();
-					
+
 					DretvaZahtjeva dretvaZahtjeva = new DretvaZahtjeva(this, veza, ss);
 					dretvaZahtjeva.start();
 				}
@@ -140,7 +140,7 @@ public class ServerGlavni {
 
 		/** Status poslužitelja. */
 		volatile static int statusPosluzitelja = 0;
-		
+
 		/** Lokalna kolekcija aerodroma. */
 		static volatile List<Aerodrom> aerodromi = new ArrayList<>();
 
@@ -159,7 +159,7 @@ public class ServerGlavni {
 
 		String inicijalizacija = "^INIT$";
 
-		String ucitavanje = "^LOAD(.*)$";
+		String ucitavanje = "LOAD";
 
 		String udaljenostIcao = "^DISTANCE ([A-Z]{4}) ([A-Z]{4})$";
 
@@ -233,7 +233,7 @@ public class ServerGlavni {
 
 			switch (status) {
 			case 0:
-				if (provjeraSintakseObrada(komanda, ucitavanje) || provjeraSintakseObrada(komanda, udaljenostIcao)
+				if (komanda.startsWith(ucitavanje) || provjeraSintakseObrada(komanda, udaljenostIcao)
 						|| provjeraSintakseObrada(komanda, ocisti)) {
 					ispisPoruke(osw, "ERROR 01 Komanda nije dozvoljena u hibernaciji poslužitelja.");
 				} else {
@@ -249,7 +249,7 @@ public class ServerGlavni {
 				}
 				break;
 			case 2:
-				if (provjeraSintakseObrada(komanda, inicijalizacija) || provjeraSintakseObrada(komanda, ucitavanje)) {
+				if (provjeraSintakseObrada(komanda, inicijalizacija) || komanda.startsWith(ucitavanje)) {
 					ispisPoruke(osw, "ERROR 03 Poslužitelj je aktivan, komanda nije dozvoljena.");
 				} else {
 					izvrsiNaredbu(osw, komanda);
@@ -313,7 +313,7 @@ public class ServerGlavni {
 				izvrsiStatus(osw, komanda);
 			} else if (provjeraSintakseObrada(komanda, inicijalizacija)) {
 				izvrsiInicijalizaciju(osw, komanda);
-			} else if (provjeraSintakseObrada(komanda, ucitavanje)) {
+			} else if (komanda.startsWith(ucitavanje)) {
 				izvrsiUcitavanje(osw, komanda);
 			} else if (provjeraSintakseObrada(komanda, udaljenostIcao)) {
 				izvrsiUdaljenostIcao(osw, komanda);
@@ -345,18 +345,22 @@ public class ServerGlavni {
 			JsonReader citac = new JsonReader(new StringReader(aero.trim()));
 			citac.setLenient(true);
 
-			synchronized (aerodromi) {
-				try {
-					aerodromi.addAll(gson.fromJson(citac, new TypeToken<List<Aerodrom>>() {
-					}.getType()));
-				} catch (JsonIOException | JsonSyntaxException e) {
-					ispisPoruke(osw, "ERROR 14 JSON format nije ispravan.");
+			List<Aerodrom> ucitaniAerodromi = new ArrayList<Aerodrom>();
+
+			try {
+				ucitaniAerodromi.addAll(gson.fromJson(citac, new TypeToken<List<Aerodrom>>() {
+				}.getType()));
+
+				synchronized (aerodromi) {
+					aerodromi.addAll(ucitaniAerodromi);
 				}
-
-				aeroUneseni = aerodromi.size();
+				
+				aeroUneseni = ucitaniAerodromi.size();
+				
+				ispisPoruke(osw, "OK " + aeroUneseni);
+			} catch (JsonIOException | JsonSyntaxException e) {
+				ispisPoruke(osw, "ERROR 14 JSON format nije ispravan.");
 			}
-
-			ispisPoruke(osw, "OK " + aeroUneseni);
 		}
 
 		private void izvrsiInicijalizaciju(OutputStreamWriter osw, String komanda) {

@@ -4,12 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,7 +25,7 @@ public class AerodromiDolasciDAO {
 	 * @param pbp postavke baze podataka
 	 * @return the lista dolazaka
 	 */
-	public List<AvionLeti> dohvatiDolaskeNaDan(String icao, String dan, PostavkeBazaPodataka pbp) {
+	public List<AvionLeti> dohvatiDolaskeZaInterval(String icao, int vrijemeOd, int vrijemeDo, PostavkeBazaPodataka pbp) {
 		String url = pbp.getServerDatabase() + pbp.getUserDatabase();
 		String bpkorisnik = pbp.getUserUsername();
 		String bplozinka = pbp.getUserPassword();
@@ -49,8 +45,8 @@ public class AerodromiDolasciDAO {
 					PreparedStatement s = con.prepareStatement(upit);) {
 
 				s.setString(1, icao);
-				s.setString(2, String.valueOf(izvrsiDatumPretvaranje(dan)));
-				s.setString(3, String.valueOf(izvrsiDatumPretvaranje(dan) + 86399));
+				s.setInt(2, vrijemeOd);
+				s.setInt(3, vrijemeDo);
 
 				ResultSet rs = s.executeQuery();
 
@@ -86,25 +82,5 @@ public class AerodromiDolasciDAO {
 		}
 
 		return null;
-	}
-
-	/**
-	 * Izvršava pretvaranje datuma u sekunde.
-	 *
-	 * @param datum datum
-	 * @return the long
-	 */
-	public long izvrsiDatumPretvaranje(String datum) {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-		Date date = null;
-		try {
-			date = sdf.parse(datum);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		long milisekunde = date.getTime();
-		long sekunde = TimeUnit.MILLISECONDS.toSeconds(milisekunde);
-
-		return sekunde;
 	}
 }

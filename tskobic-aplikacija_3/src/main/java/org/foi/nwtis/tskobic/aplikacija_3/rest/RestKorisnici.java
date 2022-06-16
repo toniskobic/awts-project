@@ -48,7 +48,7 @@ public class RestKorisnici {
 			korisnici = korisniciDAO.dohvatiSveKorisnike(konfig);
 
 			odgovor = korisnici != null ? Response.status(Response.Status.OK).entity(korisnici).build()
-					: Response.status(Response.Status.NOT_FOUND).entity("Nema korisnika.").build();
+					: Response.status(Response.Status.NOT_FOUND).entity("Neuspješno dohvaćanje korisnika.").build();
 		}
 
 		return odgovor;
