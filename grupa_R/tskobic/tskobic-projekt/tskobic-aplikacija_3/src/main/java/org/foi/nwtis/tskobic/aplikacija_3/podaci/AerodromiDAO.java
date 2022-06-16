@@ -60,6 +60,7 @@ public class AerodromiDAO {
 		} catch (ClassNotFoundException ex) {
 			Logger.getLogger(AerodromiDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
+		
 		return null;
 	}
 

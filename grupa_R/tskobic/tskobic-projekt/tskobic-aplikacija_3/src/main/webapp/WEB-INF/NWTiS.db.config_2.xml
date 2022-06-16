@@ -18,4 +18,7 @@
 <entry key="OpenSkyNetwork.lozinka"></entry>
 <entry key="zeton.trajanje">3</entry>
 <entry key="sustav.administratori">admin</entry>
+<entry key="server.adresa">localhost</entry>
+<entry key="server.port">8003</entry>
+<entry key="maks.cekanje">1800000</entry>
 </properties>

@@ -65,6 +65,54 @@ public class AerodromiPraceniDAO {
 		}
 		return null;
 	}
+	
+	/**
+	 * Dohvaća praćeni aerodrom za proslijeđeni ICAO aerodroma.
+	 *
+	 * @param unos icao aerodroma
+	 * @param pbp postavke baze podataka
+	 * @return the aerodrom
+	 */
+	public Aerodrom dohvatiPraceniAerodrom(String unos, PostavkeBazaPodataka pbp) {
+		String url = pbp.getServerDatabase() + pbp.getUserDatabase();
+		String bpkorisnik = pbp.getUserUsername();
+		String bplozinka = pbp.getUserPassword();
+		String upit = "SELECT APR.ident AS icao, A.coordinates AS coordinates, A.iso_country AS country, "
+				+ "A.name AS name FROM AERODROMI_PRACENI APR, airports A WHERE APR.ident = A.ident and APR.ident = ?;";
+
+		try {
+			Class.forName(pbp.getDriverDatabase(url));
+
+			try (Connection con = DriverManager.getConnection(url, bpkorisnik, bplozinka);
+					PreparedStatement s = con.prepareStatement(upit)) {
+
+				s.setString(1, unos);
+
+				ResultSet rs = s.executeQuery();
+				
+				if(!rs.next()) {
+					return null;
+				} else {
+					String drzava = rs.getString("country");
+					String icao = rs.getString("icao");
+					String koordinate[] = rs.getString("coordinates").split(", ");
+					Lokacija lokacija = new Lokacija();
+					lokacija.postavi(koordinate[1], koordinate[0]);
+					String naziv = rs.getString("name");
+					Aerodrom a = new Aerodrom(icao, naziv, drzava, lokacija);
+
+					return a;
+				}
+			} catch (SQLException ex) {
+				Logger.getLogger(AerodromiPraceniDAO.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(AerodromiPraceniDAO.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		
+		return null;
+	}
+	
 
 	/**
 	 * Dodaje aerodrom za praćenje.
