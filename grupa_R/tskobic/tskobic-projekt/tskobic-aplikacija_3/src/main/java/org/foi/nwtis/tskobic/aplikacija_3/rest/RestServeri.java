@@ -3,7 +3,6 @@ package org.foi.nwtis.tskobic.aplikacija_3.rest;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.StringReader;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.charset.Charset;
@@ -12,15 +11,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.foi.nwtis.podaci.Aerodrom;
+import org.foi.nwtis.tskobic.aplikacija_3.podaci.AerodromiDAO;
 import org.foi.nwtis.tskobic.aplikacija_3.podaci.Posluzitelj;
 import org.foi.nwtis.tskobic.aplikacija_3.podaci.Zeton;
 import org.foi.nwtis.tskobic.aplikacija_3.podaci.ZetoniDAO;
 import org.foi.nwtis.tskobic.vjezba_06.konfiguracije.bazaPodataka.PostavkeBazaPodataka;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 
 import jakarta.servlet.ServletContext;
 import jakarta.ws.rs.Consumes;
@@ -73,7 +70,7 @@ public class RestServeri {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("{komanda}")
-	public Response posaljiKomandu(@HeaderParam("korisnik") String korisnik, @HeaderParam("zeton") String token,
+	public Response posaljiNaredbu(@HeaderParam("korisnik") String korisnik, @HeaderParam("zeton") String token,
 			@PathParam("komanda") String komanda) {
 		Response odgovor = null;
 
@@ -105,8 +102,7 @@ public class RestServeri {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Path("LOAD")
-	public Response ucitajAerodrome(@HeaderParam("korisnik") String korisnik, @HeaderParam("zeton") String token,
-			String sadrzaj) {
+	public Response ucitajAerodrome(@HeaderParam("korisnik") String korisnik, @HeaderParam("zeton") String token) {
 		Response odgovor = null;
 
 		PostavkeBazaPodataka konfig = (PostavkeBazaPodataka) context.getAttribute("Postavke");
@@ -119,24 +115,23 @@ public class RestServeri {
 
 		odgovor = provjeriZeton(zeton, korisnik);
 		if (odgovor == null) {
-			List<Aerodrom> aerodromi = pretvoriJSON(sadrzaj);
+			AerodromiDAO aerodromiDAO = new AerodromiDAO();
+			List<Aerodrom> aerodromi = aerodromiDAO.dohvatiSveAerodrome(konfig);
+			String sadrzaj = pretvoriUJSON(aerodromi);
 
-			if (aerodromi == null) {
-				odgovor = Response.status(400).entity("Proslijeđeni JSON format nije ispravan.").build();
+			String komanda = "LOAD " + sadrzaj.trim();
+
+			String odgovorPosluzitelja = posaljiKomandu(adresa, port, cekanje, komanda);
+			if (odgovorPosluzitelja.startsWith("OK")) {
+				int brojAerodroma = Integer.valueOf(odgovorPosluzitelja.split(" ")[1]);
+
+				odgovor = brojAerodroma == aerodromi.size()
+						? Response.status(Response.Status.OK).entity(odgovorPosluzitelja).build()
+						: Response.status(Response.Status.CONFLICT).entity(odgovorPosluzitelja).build();
 			} else {
-				String komanda = "LOAD " + sadrzaj.trim();
-				
-				String odgovorPosluzitelja = posaljiKomandu(adresa, port, cekanje, komanda);
-				if (odgovorPosluzitelja.startsWith("OK")) {
-					int brojAerodroma = Integer.valueOf(odgovorPosluzitelja.split(" ")[1]);
-
-					odgovor = brojAerodroma == aerodromi.size()
-							? Response.status(Response.Status.OK).entity(odgovorPosluzitelja).build()
-							: Response.status(Response.Status.CONFLICT).entity(odgovorPosluzitelja).build();
-				} else {
-					odgovor = Response.status(Response.Status.CONFLICT).entity(odgovorPosluzitelja).build();
-				}
+				odgovor = Response.status(Response.Status.CONFLICT).entity(odgovorPosluzitelja).build();
 			}
+
 		}
 
 		return odgovor;
@@ -213,19 +208,11 @@ public class RestServeri {
 		return null;
 	}
 
-	private List<Aerodrom> pretvoriJSON(String sadrzaj) {
+	private String pretvoriUJSON(List<Aerodrom> aerodromi) {
 		Gson gson = new Gson();
-		JsonReader citac = new JsonReader(new StringReader(sadrzaj.trim()));
-		citac.setLenient(true);
 
-		List<Aerodrom> aerodromi;
-		try {
-			aerodromi = gson.fromJson(citac, new TypeToken<List<Aerodrom>>() {
-			}.getType());
-		} catch (JsonSyntaxException e) {
-			aerodromi = null;
-		}
+		String sadrzaj = gson.toJson(aerodromi);
 
-		return aerodromi;
+		return sadrzaj;
 	}
 }
