@@ -1,0 +1,21 @@
+@charset "UTF-8";
+.authorTable{   
+   border-collapse:collapse;
+   border-bottom:1px solid #000000;
+}
+
+.authorTableHeader{
+   text-align:center;
+   background:none repeat scroll 0 0 #B5B5B5;
+   border-bottom:1px solid #000000;
+   border-top:1px solid #000000;
+   padding:2px;
+}
+
+.authorTableOddRow{
+   background:none repeat scroll 0 0 #FFFFFF;	
+}
+
+.authorTableEvenRow{
+   background:none repeat scroll 0 0 #D3D3D3;
+}

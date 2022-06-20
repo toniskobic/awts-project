@@ -1,24 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.foi.nwtis.tskobic</groupId>
-	<artifactId>tskobic-projekt</artifactId>
+	<artifactId>tskobic-aplikacija_6</artifactId>
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
-	<name>tskobic-projekt</name>
-
+	<name>tskobic-aplikacija_6</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 	<modules>
-		<module>tskobic-lib_03_1</module>
-		<module>tskobic-lib_06_1</module>
-		<module>tskobic-aplikacija_1</module>
-		<module>tskobic-aplikacija_2</module>
-		<module>tskobic-aplikacija_3</module>
-		<module>tskobic-aplikacija_4</module>
-		<module>tskobic-aplikacija_5</module>
-		<module>tskobic-aplikacija_6</module>
+	 	<module>tskobic-aplikacija_6_jpa</module> 
+ 		<module>tskobic-aplikacija_6_wa</module> 
 	</modules>
 </project>

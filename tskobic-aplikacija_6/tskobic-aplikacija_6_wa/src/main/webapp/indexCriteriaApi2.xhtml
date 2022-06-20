@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
+	<h:head>
+		<title>Pregled korisnika Criteria API</title>
+	</h:head>
+	<h:body>
+		<h2>Pregled korisnika Criteria API</h2>
+		<br />
+		<p:link href="index.xhtml" value="Početak" />
+		<br />
+		<h:form id="form">
+			<p:dataTable value="#{korisniciZrnoCriteriaApi.korisnici}" var="k" 
+				paginator="true" rows="7">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Korisnik" />
+					</f:facet>
+				#{k.korisnik}
+			</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Prezime" />
+					</f:facet>
+				#{k.prezime}
+			</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Ime" />
+					</f:facet>
+				#{k.ime}
+			</p:column>
+			</p:dataTable>
+		</h:form>
+	</h:body>
+</f:view>
+</html>
