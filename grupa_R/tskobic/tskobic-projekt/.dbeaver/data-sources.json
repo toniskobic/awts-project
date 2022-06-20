@@ -1,34 +1,20 @@
 {
 	"folders": {},
 	"connections": {
-		"hsqldb_server-18158ed983c-4ef1b2a877a30a50": {
-			"provider": "generic",
-			"driver": "hsqldb_server",
-			"name": "HSQLDB - nwtis_g1 - nwtis_g1",
-			"save-password": true,
-			"read-only": false,
-			"configuration": {
-				"host": "localhost",
-				"port": "9001",
-				"database": "nwtis_g1",
-				"url": "jdbc:hsqldb:hsql://localhost:9001/nwtis_g1",
-				"type": "dev",
-				"auth-model": "native"
-			}
-		},
 		"hsqldb_server-18158ed994a-5beadecd7903960f": {
 			"provider": "generic",
 			"driver": "hsqldb_server",
-			"name": "HSQLDB - nwtis_g1 - SA",
+			"name": "HSQLDB - nwtis_bp_2 - SA",
 			"save-password": true,
 			"read-only": false,
 			"configuration": {
 				"host": "localhost",
-				"port": "9001",
-				"database": "nwtis_g1",
-				"url": "jdbc:hsqldb:hsql://localhost:9001/nwtis_g1",
+				"port": "9002",
+				"database": "nwtis_bp_2",
+				"url": "jdbc:hsqldb:hsql://localhost:9002/nwtis_bp_2",
 				"type": "dev",
-				"auth-model": "native"
+				"auth-model": "native",
+				"handlers": {}
 			}
 		},
 		"mysql8-18158ed9a49-72e13030c954a209": {
@@ -75,14 +61,33 @@
 		"hsqldb_embedded-18158ed9c1a-2a77107a513870ff": {
 			"provider": "generic",
 			"driver": "hsqldb_embedded",
-			"name": "nwtis_g1",
+			"name": "nwtis_bp_2",
 			"save-password": true,
 			"read-only": false,
 			"configuration": {
-				"database": "nwtis_g1;shutdown=true",
-				"url": "jdbc:hsqldb:mem:nwtis_g1;shutdown=true",
+				"database": "nwtis_bp_2;shutdown=true",
+				"url": "jdbc:hsqldb:file:nwtis_bp_2;shutdown=true",
 				"type": "dev",
 				"auth-model": "native"
+			},
+			"custom-properties": {
+				"database.meta.separate.connection": "false"
+			}
+		},
+		"hsqldb_server-181815257b8-7daaeb8da657c211": {
+			"provider": "generic",
+			"driver": "hsqldb_server",
+			"name": "HSQLDB - nwtis_bp_2 - nwtis_g1",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "9002",
+				"database": "nwtis_bp_2",
+				"url": "jdbc:hsqldb:hsql://localhost:9002/nwtis_bp_2",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
 			}
 		}
 	},
@@ -92,7 +97,7 @@
 				"PUBLIC": {
 					"@properties": {
 						"erd.diagram.state": {
-							"serialized": "<diagram version=\"1\" name=\"empty\" time=\"202205032151\"><entities><data-source id=\"hsqldb_server-1808b7708ff-57683113145d1c69\"><entity id=\"1\" name=\"AERODROMI_DOLASCI\" fq-name=\"PUBLIC.PUBLIC.AERODROMI_DOLASCI\" order=\"0\" x=\"900\" y=\"142\"><path name=\"PUBLIC\"/><path name=\"PUBLIC\"/></entity><entity id=\"2\" name=\"AERODROMI_POLASCI\" fq-name=\"PUBLIC.PUBLIC.AERODROMI_POLASCI\" order=\"1\" x=\"536\" y=\"139\"><path name=\"PUBLIC\"/><path name=\"PUBLIC\"/></entity><entity id=\"3\" name=\"AERODROMI_PRACENI\" fq-name=\"PUBLIC.PUBLIC.AERODROMI_PRACENI\" order=\"2\" x=\"552\" y=\"622\"><path name=\"PUBLIC\"/><path name=\"PUBLIC\"/></entity><entity id=\"4\" name=\"AERODROMI_PROBLEMI\" fq-name=\"PUBLIC.PUBLIC.AERODROMI_PROBLEMI\" order=\"3\" x=\"1028\" y=\"608\"><path name=\"PUBLIC\"/><path name=\"PUBLIC\"/></entity><entity id=\"5\" name=\"AIRPORTS\" fq-name=\"PUBLIC.PUBLIC.AIRPORTS\" order=\"4\" x=\"781\" y=\"537\"><path name=\"PUBLIC\"/><path name=\"PUBLIC\"/></entity><entity id=\"6\" name=\"GRUPE\" fq-name=\"PUBLIC.PUBLIC.GRUPE\" order=\"5\" x=\"267\" y=\"23\"><path name=\"PUBLIC\"/><path name=\"PUBLIC\"/></entity><entity id=\"7\" name=\"KORISNICI\" fq-name=\"PUBLIC.PUBLIC.KORISNICI\" order=\"6\" x=\"237\" y=\"131\"><path name=\"PUBLIC\"/><path name=\"PUBLIC\"/></entity><entity id=\"8\" name=\"ULOGE\" fq-name=\"PUBLIC.PUBLIC.ULOGE\" order=\"7\" x=\"25\" y=\"109\"><path name=\"PUBLIC\"/><path name=\"PUBLIC\"/></entity></data-source></entities><relations><relation name=\"SYS_FK_10173\" fq-name=\"PUBLIC.PUBLIC.AERODROMI_DOLASCI.SYS_FK_10173\" type=\"fk\" pk-ref=\"5\" fk-ref=\"1\"/><relation name=\"SYS_FK_10141\" fq-name=\"PUBLIC.PUBLIC.AERODROMI_POLASCI.SYS_FK_10141\" type=\"fk\" pk-ref=\"5\" fk-ref=\"2\"/><relation name=\"SYS_FK_10195\" fq-name=\"PUBLIC.PUBLIC.AERODROMI_PRACENI.SYS_FK_10195\" type=\"fk\" pk-ref=\"5\" fk-ref=\"3\"/><relation name=\"SYS_FK_10207\" fq-name=\"PUBLIC.PUBLIC.AERODROMI_PROBLEMI.SYS_FK_10207\" type=\"fk\" pk-ref=\"5\" fk-ref=\"4\"/><relation name=\"SYS_FK_10119\" fq-name=\"PUBLIC.PUBLIC.ULOGE.SYS_FK_10119\" type=\"fk\" pk-ref=\"6\" fk-ref=\"8\"/><relation name=\"SYS_FK_10118\" fq-name=\"PUBLIC.PUBLIC.ULOGE.SYS_FK_10118\" type=\"fk\" pk-ref=\"7\" fk-ref=\"8\"/></relations></diagram>"
+							"serialized": "<diagram version=\"1\" name=\"empty\" time=\"202206201544\"><entities><data-source id=\"hsqldb_server-18158ed994a-5beadecd7903960f\"><entity id=\"1\" name=\"GRUPE\" fq-name=\"PUBLIC.PUBLIC.GRUPE\" order=\"0\" x=\"752\" y=\"353\"><path name=\"PUBLIC\"/><path name=\"PUBLIC\"/></entity><entity id=\"2\" name=\"KORISNICI\" fq-name=\"PUBLIC.PUBLIC.KORISNICI\" order=\"1\" x=\"441\" y=\"44\"><path name=\"PUBLIC\"/><path name=\"PUBLIC\"/></entity><entity id=\"3\" name=\"PUTOVANJA\" fq-name=\"PUBLIC.PUBLIC.PUTOVANJA\" order=\"2\" x=\"-5\" y=\"44\"><path name=\"PUBLIC\"/><path name=\"PUBLIC\"/></entity><entity id=\"4\" name=\"PUTOVANJA_LETOVI\" fq-name=\"PUBLIC.PUBLIC.PUTOVANJA_LETOVI\" order=\"3\" x=\"19\" y=\"353\"><path name=\"PUBLIC\"/><path name=\"PUBLIC\"/></entity><entity id=\"5\" name=\"ULOGE\" fq-name=\"PUBLIC.PUBLIC.ULOGE\" order=\"4\" x=\"736\" y=\"87\"><path name=\"PUBLIC\"/><path name=\"PUBLIC\"/></entity></data-source></entities><relations><relation name=\"SYS_FK_10139\" fq-name=\"PUBLIC.PUBLIC.ULOGE.SYS_FK_10139\" type=\"fk\" pk-ref=\"1\" fk-ref=\"5\"/><relation name=\"SYS_FK_10161\" fq-name=\"PUBLIC.PUBLIC.PUTOVANJA.SYS_FK_10161\" type=\"fk\" pk-ref=\"2\" fk-ref=\"3\"/><relation name=\"SYS_FK_10138\" fq-name=\"PUBLIC.PUBLIC.ULOGE.SYS_FK_10138\" type=\"fk\" pk-ref=\"2\" fk-ref=\"5\"/><relation name=\"SYS_FK_10175\" fq-name=\"PUBLIC.PUBLIC.PUTOVANJA_LETOVI.SYS_FK_10175\" type=\"fk\" pk-ref=\"3\" fk-ref=\"4\"/></relations></diagram>"
 						}
 					}
 				}

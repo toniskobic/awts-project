@@ -84,6 +84,21 @@
 				"type": "dev",
 				"auth-model": "native"
 			}
+		},
+		"hsqldb_server-181815257b8-7daaeb8da657c211": {
+			"provider": "generic",
+			"driver": "hsqldb_server",
+			"name": "HSQLDB - nwtis_g1 - nwtis_g1 1",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "9001",
+				"database": "nwtis_g1",
+				"url": "jdbc:hsqldb:hsql://localhost:9001/nwtis_g1",
+				"type": "dev",
+				"auth-model": "native"
+			}
 		}
 	},
 	"virtual-models": {
@@ -109,7 +124,7 @@
 			"nwtis_bp_1": {
 				"@properties": {
 					"erd.diagram.state": {
-						"serialized": "<diagram version=\"1\" name=\"empty\" time=\"202206132310\"><entities><data-source id=\"mysql8-18158ed9a49-72e13030c954a209\"><entity id=\"1\" name=\"aerodromi_dolasci\" fq-name=\"nwtis_bp_1.aerodromi_dolasci\" order=\"0\" x=\"517\" y=\"436\"><path name=\"nwtis_bp_1\"/></entity><entity id=\"2\" name=\"aerodromi_polasci\" fq-name=\"nwtis_bp_1.aerodromi_polasci\" order=\"1\" x=\"1029\" y=\"433\"><path name=\"nwtis_bp_1\"/></entity><entity id=\"3\" name=\"aerodromi_praceni\" fq-name=\"nwtis_bp_1.aerodromi_praceni\" order=\"2\" x=\"570\" y=\"898\"><path name=\"nwtis_bp_1\"/></entity><entity id=\"4\" name=\"aerodromi_problemi\" fq-name=\"nwtis_bp_1.aerodromi_problemi\" order=\"3\" x=\"1074\" y=\"895\"><path name=\"nwtis_bp_1\"/></entity><entity id=\"5\" name=\"airports\" fq-name=\"nwtis_bp_1.airports\" order=\"4\" x=\"809\" y=\"818\"><path name=\"nwtis_bp_1\"/></entity><entity id=\"6\" name=\"grupe\" fq-name=\"nwtis_bp_1.grupe\" order=\"5\" x=\"276\" y=\"341\"><path name=\"nwtis_bp_1\"/></entity><entity id=\"7\" name=\"korisnici\" fq-name=\"nwtis_bp_1.korisnici\" order=\"6\" x=\"272\" y=\"571\"><path name=\"nwtis_bp_1\"/></entity><entity id=\"8\" name=\"uloge\" fq-name=\"nwtis_bp_1.uloge\" order=\"7\" x=\"56\" y=\"464\"><path name=\"nwtis_bp_1\"/></entity><entity id=\"9\" name=\"zeton\" fq-name=\"nwtis_bp_1.zeton\" order=\"8\" border-width=\"3\" x=\"86\" y=\"779\"><path name=\"nwtis_bp_1\"/></entity></data-source></entities><relations><relation name=\"aerodromi_dolasci_ibfk_1\" fq-name=\"nwtis_bp_1.aerodromi_dolasci.aerodromi_dolasci_ibfk_1\" type=\"fk\" pk-ref=\"5\" fk-ref=\"1\"/><relation name=\"aerodromi_polasci_ibfk_1\" fq-name=\"nwtis_bp_1.aerodromi_polasci.aerodromi_polasci_ibfk_1\" type=\"fk\" pk-ref=\"5\" fk-ref=\"2\"/><relation name=\"aerodromi_praceni_ibfk_1\" fq-name=\"nwtis_bp_1.aerodromi_praceni.aerodromi_praceni_ibfk_1\" type=\"fk\" pk-ref=\"5\" fk-ref=\"3\"/><relation name=\"aerodromi_problemi_ibfk_1\" fq-name=\"nwtis_bp_1.aerodromi_problemi.aerodromi_problemi_ibfk_1\" type=\"fk\" pk-ref=\"5\" fk-ref=\"4\"/><relation name=\"uloge_ibfk_2\" fq-name=\"nwtis_bp_1.uloge.uloge_ibfk_2\" type=\"fk\" pk-ref=\"6\" fk-ref=\"8\"/><relation name=\"uloge_ibfk_1\" fq-name=\"nwtis_bp_1.uloge.uloge_ibfk_1\" type=\"fk\" pk-ref=\"7\" fk-ref=\"8\"/></relations></diagram>"
+						"serialized": "<diagram version=\"1\" name=\"empty\" time=\"202206132310\"><entities><data-source id=\"mysql8-18158ed9a49-72e13030c954a209\"><entity id=\"1\" name=\"aerodromi_dolasci\" fq-name=\"nwtis_bp_1.aerodromi_dolasci\" order=\"0\" x=\"517\" y=\"436\"><path name=\"nwtis_bp_1\"/></entity><entity id=\"2\" name=\"aerodromi_polasci\" fq-name=\"nwtis_bp_1.aerodromi_polasci\" order=\"1\" x=\"1025\" y=\"432\"><path name=\"nwtis_bp_1\"/></entity><entity id=\"3\" name=\"aerodromi_praceni\" fq-name=\"nwtis_bp_1.aerodromi_praceni\" order=\"2\" x=\"570\" y=\"898\"><path name=\"nwtis_bp_1\"/></entity><entity id=\"4\" name=\"aerodromi_problemi\" fq-name=\"nwtis_bp_1.aerodromi_problemi\" order=\"3\" x=\"1074\" y=\"895\"><path name=\"nwtis_bp_1\"/></entity><entity id=\"5\" name=\"airports\" fq-name=\"nwtis_bp_1.airports\" order=\"4\" x=\"809\" y=\"818\"><path name=\"nwtis_bp_1\"/></entity><entity id=\"6\" name=\"grupe\" fq-name=\"nwtis_bp_1.grupe\" order=\"5\" x=\"276\" y=\"341\"><path name=\"nwtis_bp_1\"/></entity><entity id=\"7\" name=\"korisnici\" fq-name=\"nwtis_bp_1.korisnici\" order=\"6\" x=\"272\" y=\"571\"><path name=\"nwtis_bp_1\"/></entity><entity id=\"8\" name=\"uloge\" fq-name=\"nwtis_bp_1.uloge\" order=\"7\" x=\"56\" y=\"464\"><path name=\"nwtis_bp_1\"/></entity><entity id=\"9\" name=\"zeton\" fq-name=\"nwtis_bp_1.zeton\" order=\"8\" x=\"86\" y=\"779\"><path name=\"nwtis_bp_1\"/></entity></data-source></entities><relations><relation name=\"aerodromi_dolasci_ibfk_1\" fq-name=\"nwtis_bp_1.aerodromi_dolasci.aerodromi_dolasci_ibfk_1\" type=\"fk\" pk-ref=\"5\" fk-ref=\"1\"/><relation name=\"aerodromi_polasci_ibfk_1\" fq-name=\"nwtis_bp_1.aerodromi_polasci.aerodromi_polasci_ibfk_1\" type=\"fk\" pk-ref=\"5\" fk-ref=\"2\"/><relation name=\"aerodromi_praceni_ibfk_1\" fq-name=\"nwtis_bp_1.aerodromi_praceni.aerodromi_praceni_ibfk_1\" type=\"fk\" pk-ref=\"5\" fk-ref=\"3\"/><relation name=\"aerodromi_problemi_ibfk_1\" fq-name=\"nwtis_bp_1.aerodromi_problemi.aerodromi_problemi_ibfk_1\" type=\"fk\" pk-ref=\"5\" fk-ref=\"4\"/><relation name=\"uloge_ibfk_2\" fq-name=\"nwtis_bp_1.uloge.uloge_ibfk_2\" type=\"fk\" pk-ref=\"6\" fk-ref=\"8\"/><relation name=\"uloge_ibfk_1\" fq-name=\"nwtis_bp_1.uloge.uloge_ibfk_1\" type=\"fk\" pk-ref=\"7\" fk-ref=\"8\"/></relations></diagram>"
 					}
 				}
 			}
