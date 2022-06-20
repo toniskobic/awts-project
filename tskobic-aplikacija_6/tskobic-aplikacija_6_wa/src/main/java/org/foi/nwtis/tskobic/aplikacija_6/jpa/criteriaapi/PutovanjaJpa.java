@@ -1,9 +1,9 @@
-package org.foi.nwtis.tskobic.jpa.criteriaapi;
+package org.foi.nwtis.tskobic.aplikacija_6.jpa.criteriaapi;
 
 import java.util.List;
 
-import org.foi.nwtis.tskobic.jpa.entiteti.Putovanja;
-import org.foi.nwtis.tskobic.jpa.entiteti.Putovanja_;
+import org.foi.nwtis.tskobic.aplikacija_6.jpa.entiteti.Putovanja;
+import org.foi.nwtis.tskobic.aplikacija_6.jpa.entiteti.Putovanja_;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.Stateless;

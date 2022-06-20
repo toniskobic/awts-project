@@ -1,4 +1,4 @@
-package org.foi.nwtis.tskobic.jpa.entiteti;
+package org.foi.nwtis.tskobic.aplikacija_6.jpa.entiteti;
 
 import java.io.Serializable;
 
