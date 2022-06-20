@@ -1,22 +1,21 @@
-package org.foi.nwtis.tskobic.zrna;
+package org.foi.nwtis.tskobic.aplikacija_6.zrna;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.foi.nwtis.tskobic.jpa.criteriaapi.GrupeJpa;
-import org.foi.nwtis.tskobic.jpa.criteriaapi.KorisniciJpa;
-import org.foi.nwtis.tskobic.jpa.entiteti.Grupe;
-import org.foi.nwtis.tskobic.jpa.entiteti.Korisnici;
+import org.foi.nwtis.tskobic.aplikacija_6.jpa.criteriaapi.GrupeJpa;
+import org.foi.nwtis.tskobic.aplikacija_6.jpa.criteriaapi.KorisniciJpa;
+import org.foi.nwtis.tskobic.aplikacija_6.jpa.entiteti.Grupe;
+import org.foi.nwtis.tskobic.aplikacija_6.jpa.entiteti.Korisnici;
 
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 
-//@ConversationScoped
 @SessionScoped
-@Named("korisniciZrnoCriteriaApi")
-public class KorisniciZrnoCriteriaApi implements Serializable {
+@Named("korisniciZrno")
+public class KorisniciZrno implements Serializable {
 	/**
 	 * 
 	 */

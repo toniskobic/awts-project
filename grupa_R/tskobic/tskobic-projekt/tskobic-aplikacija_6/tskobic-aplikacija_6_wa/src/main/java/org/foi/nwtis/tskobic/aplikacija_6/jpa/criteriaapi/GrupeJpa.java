@@ -1,9 +1,9 @@
-package org.foi.nwtis.tskobic.jpa.criteriaapi;
+package org.foi.nwtis.tskobic.aplikacija_6.jpa.criteriaapi;
 
 import java.util.List;
 
-import org.foi.nwtis.tskobic.jpa.entiteti.Grupe;
-import org.foi.nwtis.tskobic.jpa.entiteti.Grupe_;
+import org.foi.nwtis.tskobic.aplikacija_6.jpa.entiteti.Grupe;
+import org.foi.nwtis.tskobic.aplikacija_6.jpa.entiteti.Grupe_;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.Stateless;

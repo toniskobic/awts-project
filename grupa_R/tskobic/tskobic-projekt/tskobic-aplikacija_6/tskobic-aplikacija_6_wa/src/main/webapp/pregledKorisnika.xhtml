@@ -6,15 +6,15 @@
 	xmlns:p="http://primefaces.org/ui">
 <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
 	<h:head>
-		<title>Pregled korisnika Criteria API</title>
+		<title>Pregled korisnika</title>
 	</h:head>
 	<h:body>
-		<h2>Pregled korisnika Criteria API</h2>
+		<h2>Pregled korisnika</h2>
 		<br />
 		<p:link href="index.xhtml" value="Početak" />
 		<br />
 		<h:form id="form">
-			<p:dataTable value="#{korisniciZrnoCriteriaApi.korisnici}" var="k" 
+			<p:dataTable value="#{korisniciZrno.korisnici}" var="k" 
 				paginator="true" rows="7">
 				<p:column>
 					<f:facet name="header">
