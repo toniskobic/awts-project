@@ -29,6 +29,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.HeaderParam;
@@ -53,7 +54,8 @@ public class RestAerodromi {
 
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response dajSveAerodrome(@HeaderParam("korisnik") String korisnik, @HeaderParam("zeton") String token) {
+	public Response dajSveAerodrome(@Context HttpServletRequest request, @HeaderParam("korisnik") String korisnik, @HeaderParam("zeton") String token) {
+		boolean parametar = request.getParameterMap().containsKey("preuzimanje");
 		Response odgovor = null;
 
 		PostavkeBazaPodataka konfig = (PostavkeBazaPodataka) context.getAttribute("Postavke");
@@ -64,8 +66,13 @@ public class RestAerodromi {
 
 		odgovor = provjeriZeton(zeton, korisnik);
 		if (odgovor == null) {
-			AerodromiDAO aerodromiDAO = new AerodromiDAO();
-			aerodromi = aerodromiDAO.dohvatiSveAerodrome(konfig);
+			if (parametar) {
+				AerodromiPraceniDAO aerodromiPraceniDAO = new AerodromiPraceniDAO();
+				aerodromi = aerodromiPraceniDAO.dohvatiPraceneAerodrome(konfig);
+			} else {
+				AerodromiDAO aerodromiDAO = new AerodromiDAO();
+				aerodromi = aerodromiDAO.dohvatiSveAerodrome(konfig);
+			}
 
 			odgovor = aerodromi != null ? Response.status(Response.Status.OK).entity(aerodromi).build()
 					: Response.status(Response.Status.NOT_FOUND).entity("Neuspješno dohvaćanje aerodroma.").build();

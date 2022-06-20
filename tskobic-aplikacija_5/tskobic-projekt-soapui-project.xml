@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.aplikacija_5.tskobic.nwtis.foi.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:dajPolaskeDan>
+         <!--Optional:-->
+         <korisnik>pkos</korisnik>
+         <!--Optional:-->
+         <zeton>1</zeton>
+         <!--Optional:-->
+         <icao>OMDB</icao>
+         <!--Optional:-->
+         <danOd>5.1.2022.</danOd>
+         <!--Optional:-->
+         <danDo>8.1.2022.</danDo>
+      </ws:dajPolaskeDan>
+   </soapenv:Body>
+</soapenv:Envelope>
