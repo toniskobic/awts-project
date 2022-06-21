@@ -13,9 +13,10 @@ import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 
+//@ConversationScoped
 @SessionScoped
-@Named("korisniciZrno")
-public class KorisniciZrno implements Serializable {
+@Named("korisniciZrnoCriteriaApi")
+public class KorisniciZrnoCriteriaApi implements Serializable {
 	/**
 	 * 
 	 */

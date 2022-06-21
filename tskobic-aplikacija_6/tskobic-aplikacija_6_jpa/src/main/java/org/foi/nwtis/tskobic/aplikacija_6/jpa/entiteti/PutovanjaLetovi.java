@@ -2,6 +2,7 @@ package org.foi.nwtis.tskobic.aplikacija_6.jpa.entiteti;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -21,15 +22,18 @@ public class PutovanjaLetovi implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(unique=true, nullable=false)
 	private int id;
 
+	@Column(nullable=false, length=30)
 	private String avion;
 
+	@Column(nullable=false)
 	private int vrijemeleta;
 
 	//bi-directional many-to-one association to Putovanja
 	@ManyToOne
-	@JoinColumn(name="PUTOVANJE")
+	@JoinColumn(name="PUTOVANJE", nullable=false)
 	private Putovanja putovanja;
 
 	public PutovanjaLetovi() {

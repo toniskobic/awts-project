@@ -5,7 +5,6 @@
 	<version>1.0.0</version>
 	<packaging>war</packaging>
 	<name>tskobic-aplikacija_6_wa</name>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>17</maven.compiler.source>
@@ -71,26 +70,6 @@
 			<artifactId>primefaces</artifactId>
 			<version>11.0.0</version>
 			<classifier>jakarta</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.22</version>
-		</dependency>
-		<dependency>
-			<groupId>org.foi.nwtis.tskobic</groupId>
-			<artifactId>tskobic-lib_03_1</artifactId>
-			<version>1.0.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.foi.nwtis.tskobic</groupId>
-			<artifactId>tskobic-lib_06_1</artifactId>
-			<version>1.0.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.foi.nwtis</groupId>
-			<artifactId>NWTiS_REST_lib</artifactId>
-			<version>2.3.0</version>
 		</dependency>
 	</dependencies>
 
@@ -263,6 +242,5 @@
 			</build>
 		</profile>
 	</profiles>
-
 
 </project>

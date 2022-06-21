@@ -4,14 +4,13 @@
 	<artifactId>tskobic-aplikacija_6</artifactId>
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
-	<name>tskobic-aplikacija_6</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 	<modules>
-	 	<module>tskobic-aplikacija_6_jpa</module> 
- 		<module>tskobic-aplikacija_6_wa</module> 
+		<module>tskobic-aplikacija_6_jpa</module>
+		<module>tskobic-aplikacija_6_wa</module>
 	</modules>
 </project>
