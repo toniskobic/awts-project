@@ -5,15 +5,13 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
 	<h:head>
-		<title>T. Škobić - aplikacija 6</title>
+		<title>Greška</title>
 	</h:head>
 	<h:body>
-		<h2>T. Škobić - aplikacija 6</h2>
+		<h2>#{korisniciZrno.greska}</h2>
 		<br />
-		<ol>
-			<li><h:link outcome="prijava.xhtml" value="Prijava" /></li>
-			<li><h:link outcome="pregledKorisnika.xhtml" value="Pregled svih korisnika" /></li>
-		</ol>
+		<br />
+		<h:link outcome="index.xhtml" value="Početak" />
 	</h:body>
 </f:view>
 </html>

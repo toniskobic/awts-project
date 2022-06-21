@@ -1,0 +1,748 @@
+{
+	"info": {
+		"_postman_id": "f1dfbaf7-3adb-4097-a523-f40608909458",
+		"name": "provjere",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16964203"
+	},
+	"item": [
+		{
+			"name": "autentifikacijaKorisnika",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "korisnik",
+						"value": "pkos",
+						"type": "text"
+					},
+					{
+						"key": "lozinka",
+						"value": "123456",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tskobic-aplikacija_3",
+						"api",
+						"provjere"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "uspješno",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "lozinka",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"provjere"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"vrijeme\": \"2022-06-21T23:02:01.046746200\",\r\n    \"zeton\": 33\r\n}"
+				},
+				{
+					"name": "greška",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "lozinka",
+								"value": "12345",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"provjere"
+							]
+						}
+					},
+					"code": 401,
+					"_postman_previewlanguage": "text",
+					"header": null,
+					"cookie": [],
+					"body": "Autentifikacija nije uspješna, pogrešno korisničko ime ili lozinka."
+				}
+			]
+		},
+		{
+			"name": "provjeraZetona",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "korisnik",
+						"value": "pkos",
+						"type": "text"
+					},
+					{
+						"key": "lozinka",
+						"value": "123456",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere/26",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tskobic-aplikacija_3",
+						"api",
+						"provjere",
+						"26"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "isteklo",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "lozinka",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"provjere",
+								"1"
+							]
+						}
+					},
+					"code": 408,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Vrijeme trajanja žetona je isteklo."
+				},
+				{
+					"name": "uspješno",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "lozinka",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere/26",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"provjere",
+								"26"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton je aktivan."
+				},
+				{
+					"name": "pogrešno vlasništvo",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "mloncaric",
+								"type": "text"
+							},
+							{
+								"key": "lozinka",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere/26",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"provjere",
+								"26"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "text",
+					"header": null,
+					"cookie": [],
+					"body": "Žeton ne pripada korisniku."
+				},
+				{
+					"name": "ne postoji",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "mloncaric",
+								"type": "text"
+							},
+							{
+								"key": "lozinka",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere/262",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"provjere",
+								"262"
+							]
+						}
+					},
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton ne postoji."
+				},
+				{
+					"name": "status nevažeći",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "lozinka",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere/26",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"provjere",
+								"26"
+							]
+						}
+					},
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Status žetona nije važeći."
+				}
+			]
+		},
+		{
+			"name": "deaktivirajZeton",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "korisnik",
+						"value": "pkos",
+						"type": "text"
+					},
+					{
+						"key": "lozinka",
+						"value": "123456",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere/27",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tskobic-aplikacija_3",
+						"api",
+						"provjere",
+						"27"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "isteklo",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "lozinka",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere/14",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"provjere",
+								"14"
+							]
+						}
+					},
+					"status": "Request Timeout",
+					"code": 408,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Vrijeme trajanja žetona je isteklo."
+				},
+				{
+					"name": "već deaktiviran",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "lozinka",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere/14",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"provjere",
+								"14"
+							]
+						}
+					},
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton je već deaktiviran."
+				},
+				{
+					"name": "deaktiviran",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "lozinka",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere/25",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"provjere",
+								"25"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton je deaktiviran."
+				},
+				{
+					"name": "ne postoji",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "lozinka",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere/27",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"provjere",
+								"27"
+							]
+						}
+					},
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton ne postoji."
+				},
+				{
+					"name": "pogrešno vlasništvo",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "lozinka",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere/27",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"provjere",
+								"27"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton ne pripada korisniku."
+				}
+			]
+		},
+		{
+			"name": "deaktivirajZetone",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "korisnik",
+						"value": "pkos",
+						"type": "text"
+					},
+					{
+						"key": "lozinka",
+						"value": "123456",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere/korisnik/pkos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tskobic-aplikacija_3",
+						"api",
+						"provjere",
+						"korisnik",
+						"pkos"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "autentifikacija neuspješna",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "lozinka",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere/korisnik/pkos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"provjere",
+								"korisnik",
+								"pkos"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Autentifikacija nije uspješna, pogrešno korisničko ime ili lozinka."
+				},
+				{
+					"name": "provjere korisnik tokeni",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "lozinka",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere/korisnik/pkos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"provjere",
+								"korisnik",
+								"pkos"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Korisnik nema ovlaštenje za brisanje žetona."
+				},
+				{
+					"name": "nema aktivne",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "lozinka",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere/korisnik/pkos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"provjere",
+								"korisnik",
+								"pkos"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Korisnik nema nijedan aktivni žeton."
+				},
+				{
+					"name": "provjere korisnik tokeni",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "lozinka",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/provjere/korisnik/pkos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"provjere",
+								"korisnik",
+								"pkos"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Korisnikovi žetoni su deaktivirani."
+				}
+			]
+		}
+	]
+}

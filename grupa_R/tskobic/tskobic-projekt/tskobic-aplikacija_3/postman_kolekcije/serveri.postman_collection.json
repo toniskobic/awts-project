@@ -1,0 +1,936 @@
+{
+	"info": {
+		"_postman_id": "2dcf87b5-829f-4d4d-b3dc-efb12e7c1c66",
+		"name": "serveri",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16964203"
+	},
+	"item": [
+		{
+			"name": "dajStatus",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "korisnik",
+						"value": "pkos",
+						"type": "text"
+					},
+					{
+						"key": "zeton",
+						"value": "24",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tskobic-aplikacija_3",
+						"api",
+						"serveri"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "žeton ne postoji",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton ne postoji."
+				},
+				{
+					"name": "pogrešno vlasništvo žetona",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton ne pripada korisniku."
+				},
+				{
+					"name": "žeton istekao",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri"
+							]
+						}
+					},
+					"status": "Request Timeout",
+					"code": 408,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Vrijeme trajanja žetona je isteklo."
+				},
+				{
+					"name": "status žetona nevažeći",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Status žetona nije važeći."
+				},
+				{
+					"name": "status",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri"
+							]
+						}
+					},
+					"code": 1,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"adresa\":\"localhost\",\r\n    \"port\":\"8003\"\r\n}"
+				},
+				{
+					"name": "poslužitelj nije podignut",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Poslužitelj na utičnici nije podignut."
+				}
+			]
+		},
+		{
+			"name": "posaljiNaredbu",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "korisnik",
+						"value": "pkos",
+						"type": "text"
+					},
+					{
+						"key": "zeton",
+						"value": "39",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri/CLEAR",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tskobic-aplikacija_3",
+						"api",
+						"serveri",
+						"CLEAR"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "žeton ne postoji",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "26",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri/INIT",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri",
+								"INIT"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton ne postoji."
+				},
+				{
+					"name": "pogrešno vlasništvo žetona",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "26",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri/QUIT",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri",
+								"QUIT"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton ne pripada korisniku."
+				},
+				{
+					"name": "žeton istekao",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "26",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri/INIT",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri",
+								"INIT"
+							]
+						}
+					},
+					"status": "Request Timeout",
+					"code": 408,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Vrijeme trajanja žetona je isteklo."
+				},
+				{
+					"name": "status žetona nevažeći",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "26",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri/INIT",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri",
+								"INIT"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Status žetona nije važeći."
+				},
+				{
+					"name": "neispravna komanda",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "26",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri/INICIJALIZACIJA",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri",
+								"INICIJALIZACIJA"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Neispravna komanda."
+				},
+				{
+					"name": "poslužitelj nije podignut",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "26",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri/INIT",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri",
+								"INIT"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Poslužitelj na utičnici nije podignut."
+				},
+				{
+					"name": "nedozvoljena komanda",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "26",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri/INIT",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri",
+								"INIT"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "ERROR 02 Poslužitelj je inicijaliziran, komanda nije dozvoljena."
+				}
+			]
+		},
+		{
+			"name": "ucitajAerodrome",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "korisnik",
+						"value": "pkos",
+						"type": "text"
+					},
+					{
+						"key": "zeton",
+						"value": "39",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri/LOAD",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tskobic-aplikacija_3",
+						"api",
+						"serveri",
+						"LOAD"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "žeton ne postoji",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "26",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri/LOAD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri",
+								"LOAD"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton ne postoji."
+				},
+				{
+					"name": "pogrešno vlasništvo žetona",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "26",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri/LOAD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri",
+								"LOAD"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton ne pripada korisniku."
+				},
+				{
+					"name": "žeton istekao",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "26",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri/LOAD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri",
+								"LOAD"
+							]
+						}
+					},
+					"status": "Request Timeout",
+					"code": 408,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Vrijeme trajanja žetona je isteklo."
+				},
+				{
+					"name": "status žetona nevažeći",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "26",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri/LOAD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri",
+								"LOAD"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Status žetona nije važeći."
+				},
+				{
+					"name": "poslužitelj nije podignut",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "26",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri/LOAD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri",
+								"LOAD"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Poslužitelj na utičnici nije podignut."
+				},
+				{
+					"name": "učitano",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "26",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri/LOAD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri",
+								"LOAD"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "OK 543"
+				},
+				{
+					"name": "greška kod učitavanja",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "26",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/serveri/LOAD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"serveri",
+								"LOAD"
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "OK 542"
+				}
+			]
+		}
+	]
+}
