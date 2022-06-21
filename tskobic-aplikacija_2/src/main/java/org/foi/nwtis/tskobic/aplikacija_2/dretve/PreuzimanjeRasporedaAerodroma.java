@@ -30,10 +30,6 @@ public class PreuzimanjeRasporedaAerodroma extends Thread {
 
 	boolean kraj = false;
 
-	int ciklusVrijeme;
-
-	int ciklusKorekcija;
-
 	int preuzimanjeOdmak;
 
 	int preuzimanjePauza;
@@ -43,16 +39,20 @@ public class PreuzimanjeRasporedaAerodroma extends Thread {
 
 	/** datum do kojeg se preuzimaju podaci. */
 	long preuzimanjeDo;
-
-	/** vrijeme za koje se preuzimaju podaci u jednom ciklusu */
-	long preuzimanjeVrijeme;
-
+	
 	/** vrijeme obrade. */
 	long vrijemeObrade;
 
+	/** vrijeme za koje se preuzimaju podaci u jednom ciklusu */
+	int preuzimanjeVrijeme;
+
 	long trenutniDatum;
 
-	long preuzimanjeDoKorekcija;
+	long trenutniDatumKorekcija;
+	
+	int ciklusVrijeme;
+
+	int ciklusKorekcija;
 
 	/** aerodromi praceni DAO. */
 	AerodromiPraceniDAO aerodromiPraceniDAO;
@@ -99,7 +99,7 @@ public class PreuzimanjeRasporedaAerodroma extends Thread {
 		preuzimanjeOd = izvrsiDatumPretvaranje(konfig.dajPostavku("preuzimanje.od"));
 		preuzimanjeDo = izvrsiDatumPretvaranje(konfig.dajPostavku("preuzimanje.do"));
 		preuzimanjeOdmak = Integer.parseInt(konfig.dajPostavku("preuzimanje.odmak"));
-		preuzimanjeVrijeme = Long.parseLong(konfig.dajPostavku("preuzimanje.vrijeme"));
+		preuzimanjeVrijeme = Integer.parseInt(konfig.dajPostavku("preuzimanje.vrijeme"));
 		preuzimanjePauza = Integer.parseInt(konfig.dajPostavku("preuzimanje.pauza"));
 		ciklusVrijeme = Integer.parseInt(konfig.dajPostavku("ciklus.vrijeme")) * 1000;
 		ciklusKorekcija = Integer.parseInt(konfig.dajPostavku("ciklus.korekcija"));
@@ -123,28 +123,28 @@ public class PreuzimanjeRasporedaAerodroma extends Thread {
 	 */
 	@Override
 	public void run() {
-		trenutniDatum = System.currentTimeMillis();
-		preuzimanjeDoKorekcija = trenutniDatum - (86400 * 1000 * preuzimanjeOdmak);
-
-		long vrijemeDohvata = 0;
-		long vrijemeEfektivnogRada = 0;
-		int brojCiklusa = 0;
-		int brojVirtualnogCiklusa = 0;
-		long pocetakEfektivnogRada;
-		int vrijemeRadaISpavanja = 0;
+		long vrijemeObradeDo = 0;
+		long efektivnoVrijeme = 0;
+		int ciklus = 0;
+		int virtualniCiklus = 0;
+		long pocetak;
+		int ukupniRadISpavanje = 0;
 		long vrijemeSpavanja = 0;
 		int broj = 0;
+		
+		trenutniDatum = System.currentTimeMillis();
+		trenutniDatumKorekcija = trenutniDatum - (86400 * 1000 * preuzimanjeOdmak);
 
 		while (!kraj && vrijemeObrade < preuzimanjeDo) {
 			List<Aerodrom> aerodromi = aerodromiPraceniDAO.dohvatiPraceneAerodrome(konfig);
 
-			brojCiklusa++;
-			pocetakEfektivnogRada = System.currentTimeMillis();
+			ciklus++;
+			pocetak = System.currentTimeMillis();
 
-			vrijemeDohvata = vrijemeObrade + (preuzimanjeVrijeme * 3600 * 1000);
-			if (vrijemeDohvata > preuzimanjeDoKorekcija) {
-				preuzimanjeDoKorekcija += 86400 * 1000;
-				brojVirtualnogCiklusa += (86400 * 1000) / ciklusVrijeme;
+			vrijemeObradeDo = vrijemeObrade + (preuzimanjeVrijeme * 3600 * 1000);
+			if (vrijemeObradeDo > trenutniDatumKorekcija) {
+				trenutniDatumKorekcija += 86400 * 1000;
+				virtualniCiklus += (86400 * 1000) / ciklusVrijeme;
 				vrijemeSpavanja = 86400 * 1000;
 			} else {
 				for (Aerodrom aerodrom : aerodromi) {
@@ -152,7 +152,7 @@ public class PreuzimanjeRasporedaAerodroma extends Thread {
 
 					try {
 						avioniPolasci = oSKlijent.getDepartures(aerodrom.getIcao(), vrijemeObrade / 1000,
-								vrijemeDohvata / 1000);
+								vrijemeObradeDo / 1000);
 						if (avioniPolasci != null) {
 							System.out.println("Broj letova: " + avioniPolasci.size());
 
@@ -181,7 +181,7 @@ public class PreuzimanjeRasporedaAerodroma extends Thread {
 
 					try {
 						avioniDolasci = oSKlijent.getArrivals(aerodrom.getIcao(), vrijemeObrade / 1000,
-								vrijemeDohvata / 1000);
+								vrijemeObradeDo / 1000);
 
 						if (avioniDolasci != null) {
 							System.out.println("Broj letova: " + avioniDolasci.size());
@@ -210,15 +210,15 @@ public class PreuzimanjeRasporedaAerodroma extends Thread {
 					}
 				}
 
-				vrijemeEfektivnogRada = System.currentTimeMillis() - pocetakEfektivnogRada;
-				vrijemeRadaISpavanja += vrijemeEfektivnogRada;
-				broj = brojCiklusa(vrijemeEfektivnogRada);
+				efektivnoVrijeme = System.currentTimeMillis() - pocetak;
+				ukupniRadISpavanje += efektivnoVrijeme;
+				broj = izracunajCiklus(efektivnoVrijeme);
 
-				brojVirtualnogCiklusa += broj;
+				virtualniCiklus += broj;
 
-				vrijemeSpavanja = brojCiklusa != 0 && brojCiklusa % ciklusKorekcija == 0
-						? brojVirtualnogCiklusa * ciklusVrijeme - vrijemeRadaISpavanja
-						: broj * ciklusVrijeme - vrijemeEfektivnogRada;
+				vrijemeSpavanja = ciklus != 0 && ciklus % ciklusKorekcija == 0
+						? virtualniCiklus * ciklusVrijeme - ukupniRadISpavanje
+						: broj * ciklusVrijeme - efektivnoVrijeme;
 
 			}
 
@@ -231,7 +231,7 @@ public class PreuzimanjeRasporedaAerodroma extends Thread {
 			} catch (IllegalArgumentException | InterruptedException e) {
 			}
 
-			this.vrijemeObrade = vrijemeDohvata;
+			this.vrijemeObrade = vrijemeObradeDo;
 		}
 	}
 
@@ -263,7 +263,7 @@ public class PreuzimanjeRasporedaAerodroma extends Thread {
 		return milisekunde;
 	}
 
-	public int brojCiklusa(long efektivnoVrijeme) {
+	public int izracunajCiklus(long efektivnoVrijeme) {
 		int i = 1;
 
 		while (efektivnoVrijeme > (ciklusVrijeme * i)) {

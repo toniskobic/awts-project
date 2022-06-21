@@ -56,11 +56,16 @@ public class RestServeri {
 			String komanda = "STATUS";
 			String odgovorPosluzitelja = posaljiKomandu(adresa, port, cekanje, komanda);
 
-			if (odgovorPosluzitelja.startsWith("OK")) {
-				int udaljenost = Integer.valueOf(odgovorPosluzitelja.split(" ")[1]);
-				odgovor = Response.status(udaljenost).entity(new Posluzitelj(adresa, port)).build();
+			if (odgovorPosluzitelja != null) {
+				if (odgovorPosluzitelja.startsWith("OK")) {
+					int udaljenost = Integer.valueOf(odgovorPosluzitelja.split(" ")[1]);
+					odgovor = Response.status(udaljenost).entity(new Posluzitelj(adresa, port)).build();
+				} else {
+					odgovor = Response.status(Response.Status.BAD_REQUEST).entity(odgovorPosluzitelja).build();
+				}
 			} else {
-				odgovor = Response.status(Response.Status.BAD_REQUEST).entity(odgovorPosluzitelja).build();
+				odgovor = Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+						.entity("Poslužitelj na utičnici nije podignut.").build();
 			}
 		}
 
@@ -86,10 +91,15 @@ public class RestServeri {
 		if (odgovor == null) {
 			if (komanda.equals("QUIT") || komanda.equals("INIT") || komanda.equals("CLEAR")) {
 				String odgovorPosluzitelja = posaljiKomandu(adresa, port, cekanje, komanda);
-
-				odgovor = odgovorPosluzitelja.equals("OK")
-						? Response.status(Response.Status.OK).entity(odgovorPosluzitelja).build()
-						: Response.status(Response.Status.BAD_REQUEST).entity(odgovorPosluzitelja).build();
+				
+				if (odgovorPosluzitelja != null) {
+					odgovor = odgovorPosluzitelja.equals("OK")
+							? Response.status(Response.Status.OK).entity(odgovorPosluzitelja).build()
+							: Response.status(Response.Status.BAD_REQUEST).entity(odgovorPosluzitelja).build();
+				} else {
+					odgovor = Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+							.entity("Poslužitelj na utičnici nije podignut.").build();
+				}
 			} else {
 				odgovor = Response.status(Response.Status.BAD_REQUEST).entity("Neispravna komanda.").build();
 			}
@@ -122,16 +132,21 @@ public class RestServeri {
 			String komanda = "LOAD " + sadrzaj.trim();
 
 			String odgovorPosluzitelja = posaljiKomandu(adresa, port, cekanje, komanda);
-			if (odgovorPosluzitelja.startsWith("OK")) {
-				int brojAerodroma = Integer.valueOf(odgovorPosluzitelja.split(" ")[1]);
+			
+			if (odgovorPosluzitelja != null) {
+				if (odgovorPosluzitelja.startsWith("OK")) {
+					int brojAerodroma = Integer.valueOf(odgovorPosluzitelja.split(" ")[1]);
 
-				odgovor = brojAerodroma == aerodromi.size()
-						? Response.status(Response.Status.OK).entity(odgovorPosluzitelja).build()
-						: Response.status(Response.Status.CONFLICT).entity(odgovorPosluzitelja).build();
+					odgovor = brojAerodroma == aerodromi.size()
+							? Response.status(Response.Status.OK).entity(odgovorPosluzitelja).build()
+							: Response.status(Response.Status.CONFLICT).entity(odgovorPosluzitelja).build();
+				} else {
+					odgovor = Response.status(Response.Status.CONFLICT).entity(odgovorPosluzitelja).build();
+				}
 			} else {
-				odgovor = Response.status(Response.Status.CONFLICT).entity(odgovorPosluzitelja).build();
+				odgovor = Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+						.entity("Poslužitelj na utičnici nije podignut.").build();
 			}
-
 		}
 
 		return odgovor;
@@ -198,8 +213,12 @@ public class RestServeri {
 			Logger.getLogger(RestAerodromi.class.getName()).log(Level.SEVERE, null, e);
 		} finally {
 			try {
-				isr.close();
-				osw.close();
+				if (isr != null) {
+					isr.close();
+				}
+				if (osw != null) {
+					osw.close();
+				}
 			} catch (IOException e) {
 				Logger.getLogger(RestAerodromi.class.getName()).log(Level.SEVERE, null, e);
 			}

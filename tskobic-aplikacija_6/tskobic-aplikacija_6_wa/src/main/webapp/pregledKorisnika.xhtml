@@ -6,21 +6,33 @@
 	xmlns:p="http://primefaces.org/ui">
 <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
 	<h:head>
-		<title>Pregled korisnika Criteria API</title>
+		<title>Pregled korisnika</title>
+		<h:outputStylesheet library="css" name="dizajn.css" />
 	</h:head>
+	<f:metadata>
+		<f:viewAction action="#{korisniciZrno.provjeriStatusPrijave}" />
+	</f:metadata>
 	<h:body>
-		<h2>Pregled korisnika Criteria API</h2>
+		<h2>Pregled korisnika</h2>
 		<br />
 		<p:link href="index.xhtml" value="Početak" />
 		<br />
+		<h:form id="f_sinkronizacija">
+			<h:commandButton id="sinkronizacija"
+				action="#{korisniciZrno.sinkroniziraj}" value="Sinkroniziraj">
+				<f:ajax event="action" render="form" />
+			</h:commandButton>
+		</h:form>
+		<br />
 		<h:form id="form">
-			<p:dataTable value="#{korisniciZrnoCriteriaApi.korisnici}" var="k" 
+			<p:dataTable value="#{korisniciZrno.korisnici}" var="k"
+				rowStyleClass="#{korisniciZrno.provjeriKorisnika(k.korIme) ? 'nesinkronizirano' : null}"
 				paginator="true" rows="7">
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Korisnik" />
 					</f:facet>
-				#{k.korisnik}
+				#{k.korIme}
 			</p:column>
 				<p:column>
 					<f:facet name="header">

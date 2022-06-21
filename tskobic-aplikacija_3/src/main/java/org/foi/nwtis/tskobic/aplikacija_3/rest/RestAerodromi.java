@@ -113,7 +113,7 @@ public class RestAerodromi {
 					} else {
 						boolean status = aerodromiPraceniDAO.dodajAerodromZaPracenje(a.getIcao(), konfig);
 						odgovor = status
-								? Response.status(Response.Status.OK).entity("Aerodrom za praćenje dodan").build()
+								? Response.status(Response.Status.OK).entity("Aerodrom za praćenje dodan.").build()
 								: Response.status(500).entity("Aerodrom za praćenje nije dodan.").build();
 					}
 				}
@@ -225,13 +225,13 @@ public class RestAerodromi {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("{icao}/dolasci")
-	public Response dajDolaske(@HeaderParam("korisnik") String korisnik, @HeaderParam("zeton") String token,
+	public Response dajDolaskeAerodroma(@HeaderParam("korisnik") String korisnik, @HeaderParam("zeton") String token,
 			@PathParam("icao") String icao, @QueryParam("vrsta") String vrsta, @QueryParam("od") String vrijemeOd,
 			@QueryParam("do") String vrijemeDo) {
 		Response odgovor = null;
 
 		PostavkeBazaPodataka konfig = (PostavkeBazaPodataka) context.getAttribute("Postavke");
-		List<AvionLeti> aerodromPolasci = null;
+		List<AvionLeti> aerodromDolasci = null;
 		
 		ZetoniDAO zetoniDAO = new ZetoniDAO();
 
@@ -249,10 +249,10 @@ public class RestAerodromi {
 				doVrijeme = Integer.valueOf(vrijemeDo);
 			}
 			
-			AerodromiDolasciDAO aerodromiPolasciDAO = new AerodromiDolasciDAO();
-			aerodromPolasci = aerodromiPolasciDAO.dohvatiDolaskeZaInterval(icao, odVrijeme, doVrijeme, konfig);
+			AerodromiDolasciDAO aerodromiDolasciDAO = new AerodromiDolasciDAO();
+			aerodromDolasci = aerodromiDolasciDAO.dohvatiDolaskeZaInterval(icao, odVrijeme, doVrijeme, konfig);
 			
-			odgovor = Response.status(Response.Status.OK).entity(aerodromPolasci).build();
+			odgovor = Response.status(Response.Status.OK).entity(aerodromDolasci).build();
 		}
 
 		return odgovor;
@@ -320,8 +320,12 @@ public class RestAerodromi {
 			Logger.getLogger(RestAerodromi.class.getName()).log(Level.SEVERE, null, e);
 		} finally {
 			try {
-				isr.close();
-				osw.close();
+				if(isr != null) {
+					isr.close();
+				}
+				if(osw != null) {
+					osw.close();
+				}
 			} catch (IOException e) {
 				Logger.getLogger(RestAerodromi.class.getName()).log(Level.SEVERE, null, e);
 			}

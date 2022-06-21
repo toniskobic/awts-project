@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
+	<h:head>
+		<title>Prijava</title>
+	</h:head>
+	<h:body>
+		<h2>Prijava</h2>
+		<br />
+		<h:link outcome="index.xhtml" value="Početak" />
+		<br />
+		<br />
+		<h:form id="f_prijava">
+        	Korisničko ime: <h:inputText id="korIme"
+				value="#{korisniciZrno.korIme}" />
+			<br />
+        	Lozinka: <h:inputSecret id="lozinka"
+				value="#{korisniciZrno.lozinka}" />
+			<br />
+			<h:commandButton id="prijava"
+				action="#{korisniciZrno.prijaviKorisnika}" value="Prijavi se" />
+		</h:form>
+		<br />
+		<br />
+		<h:form id="f_odjava">
+			<h:commandButton id="odjava"
+				action="#{korisniciZrno.odjaviKorisnika}" value="Odjava" />
+		</h:form>
+		<br />
+	</h:body>
+</f:view>
+</html>

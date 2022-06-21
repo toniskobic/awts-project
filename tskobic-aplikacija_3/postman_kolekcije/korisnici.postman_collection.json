@@ -1,0 +1,1160 @@
+{
+	"info": {
+		"_postman_id": "45f7b352-c628-44c3-92bd-9b62ae5cefaa",
+		"name": "korisnici",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16964203"
+	},
+	"item": [
+		{
+			"name": "dajSveKorisnike",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "korisnik",
+						"value": "pkos",
+						"type": "text"
+					},
+					{
+						"key": "zeton",
+						"value": "39",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tskobic-aplikacija_3",
+						"api",
+						"korisnici"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "žeton ne postoji",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "5",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton ne postoji."
+				},
+				{
+					"name": "žeton ne pripada",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "5",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton ne pripada korisniku."
+				},
+				{
+					"name": "žeton istekao",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "5",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici"
+							]
+						}
+					},
+					"status": "Request Timeout",
+					"code": 408,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Vrijeme trajanja žetona je isteklo."
+				},
+				{
+					"name": "status žetona nevažeći",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "5",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Status žetona nije važeći."
+				},
+				{
+					"name": "neuspješno dohvaćanje",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "5",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Neuspješno dohvaćanje korisnika."
+				},
+				{
+					"name": "korisnici",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "39",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\n    {\n        \"email\": \"avucic@foi.hr\",\n        \"ime\": \"Ante\",\n        \"korIme\": \"avucic\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Vučić\"\n    },\n    {\n        \"email\": \"dlasta@foi.hr\",\n        \"ime\": \"Dunja\",\n        \"korIme\": \"dlasta\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Lasta\"\n    },\n    {\n        \"email\": \"fvrana@foi.hr\",\n        \"ime\": \"Fran\",\n        \"korIme\": \"fvrana\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Vrana\"\n    },\n    {\n        \"email\": \"george@foi.hr\",\n        \"ime\": \"George\",\n        \"korIme\": \"gharrison\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Harrison\"\n    },\n    {\n        \"email\": \"hgavran@foi.hr\",\n        \"ime\": \"Helga\",\n        \"korIme\": \"hgavran\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Gavran\"\n    },\n    {\n        \"email\": \"ivuk@foi.hr\",\n        \"ime\": \"Ivo\",\n        \"korIme\": \"ivuk\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Vuk\"\n    },\n    {\n        \"email\": \"jdean@foi.hr\",\n        \"ime\": \"James\",\n        \"korIme\": \"jdean\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Dean\"\n    },\n    {\n        \"email\": \"janica@foi.hr\",\n        \"ime\": \"Janica\",\n        \"korIme\": \"jkostelic\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Kostelic\"\n    },\n    {\n        \"email\": \"john@foi.hr\",\n        \"ime\": \"John\",\n        \"korIme\": \"jlennon\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Lennon\"\n    },\n    {\n        \"email\": \"jlo@foi.hr\",\n        \"ime\": \"Jennifer\",\n        \"korIme\": \"jlopez\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Lopez\"\n    },\n    {\n        \"email\": \"janis@foi.hr\",\n        \"ime\": \"Janis\",\n        \"korIme\": \"joplin\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Joplin\"\n    },\n    {\n        \"email\": \"lfazan@foi.hr\",\n        \"ime\": \"Luka\",\n        \"korIme\": \"lfazan\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Fazan\"\n    },\n    {\n        \"email\": \"lris@foi.hr\",\n        \"ime\": \"Lara\",\n        \"korIme\": \"lris\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Ris\"\n    },\n    {\n        \"email\": \"mloncaric@foi.hr\",\n        \"ime\": \"Mirna\",\n        \"korIme\": \"mloncaric\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Lončarić\"\n    },\n    {\n        \"email\": \"mmatic@foi.hr\",\n        \"ime\": \"Mate\",\n        \"korIme\": \"mmatic\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Matić\"\n    },\n    {\n        \"email\": \"mmedved@foi.hr\",\n        \"ime\": \"Mato\",\n        \"korIme\": \"mmedved\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Medved\"\n    },\n    {\n        \"email\": \"pgreen@foi.hr\",\n        \"ime\": \"Peter\",\n        \"korIme\": \"pgreen\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Green\"\n    },\n    {\n        \"email\": \"psiljeg@foi.hr\",\n        \"ime\": \"Petar\",\n        \"korIme\": \"piljeg\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Šiljeg\"\n    },\n    {\n        \"email\": \"pero@foi.hr\",\n        \"ime\": \"Pero\",\n        \"korIme\": \"pkos\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Kos\"\n    },\n    {\n        \"email\": \"paul@foi.hr\",\n        \"ime\": \"Paul\",\n        \"korIme\": \"pmccartney\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"McCartney\"\n    },\n    {\n        \"email\": \"ringo@foi.hr\",\n        \"ime\": \"Ringo\",\n        \"korIme\": \"rstar\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Star\"\n    },\n    {\n        \"email\": \"ssokol@foi.hr\",\n        \"ime\": \"Sonja\",\n        \"korIme\": \"ssokol\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Sokol\"\n    },\n    {\n        \"email\": \"tjones@foi.hr\",\n        \"ime\": \"Tom\",\n        \"korIme\": \"tjones\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Jones\"\n    },\n    {\n        \"email\": \"tskobic@foi.hr\",\n        \"ime\": \"Toni\",\n        \"korIme\": \"tskobic\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Škobić\"\n    },\n    {\n        \"email\": \"ssokol@foi.hr\",\n        \"ime\": \"Vice\",\n        \"korIme\": \"vtovar\",\n        \"lozinka\": \"123456\",\n        \"prezime\": \"Tovar\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "dodajKorisnika",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "korisnik",
+						"value": "pkos",
+						"type": "text"
+					},
+					{
+						"key": "zeton",
+						"value": "16",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"korIme\": \"avucic\",\r\n        \"ime\": \"Ante\",\r\n        \"prezime\": \"Vučić\",\r\n        \"lozinka\": \"123456\",\r\n        \"email\": \"avucic@foi.hr\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tskobic-aplikacija_3",
+						"api",
+						"korisnici"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "žeton ne postoji",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "16",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"korIme\": \"avucic\",\r\n        \"ime\": \"Ante\",\r\n        \"prezime\": \"Vučić\",\r\n        \"lozinka\": \"123456\",\r\n        \"email\": \"avucic@foi.hr\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton ne postoji."
+				},
+				{
+					"name": "žeton ne pripada",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "16",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"korIme\": \"avucic\",\r\n        \"ime\": \"Ante\",\r\n        \"prezime\": \"Vučić\",\r\n        \"lozinka\": \"123456\",\r\n        \"email\": \"avucic@foi.hr\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton ne pripada korisniku."
+				},
+				{
+					"name": "žeton istekao",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "16",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"korIme\": \"avucic\",\r\n        \"ime\": \"Ante\",\r\n        \"prezime\": \"Vučić\",\r\n        \"lozinka\": \"123456\",\r\n        \"email\": \"avucic@foi.hr\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici"
+							]
+						}
+					},
+					"status": "Request Timeout",
+					"code": 408,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Vrijeme trajanja žetona je isteklo."
+				},
+				{
+					"name": "status žetona nevažeći",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "16",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"korIme\": \"avucic\",\r\n        \"ime\": \"Ante\",\r\n        \"prezime\": \"Vučić\",\r\n        \"lozinka\": \"123456\",\r\n        \"email\": \"avucic@foi.hr\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Status žetona nije važeći."
+				},
+				{
+					"name": "JSON format neispravan",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "16",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"korIme13\": \"avucic\",\r\n        \"imedsad\": \"Ante\",\r\n        \"prezimeasda\": \"Vučić\",\r\n        \"lozinkadasd\": \"123456\",\r\n        \"emailadd\": \"avucic@foi.hr\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Proslijeđeni JSON format nije ispravan."
+				},
+				{
+					"name": "korisnik dodan",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "16",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"korIme\": \"avucic\",\r\n        \"ime\": \"Ante\",\r\n        \"prezime\": \"Vučić\",\r\n        \"lozinka\": \"123456\",\r\n        \"email\": \"avucic@foi.hr\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Korisnik dodan."
+				},
+				{
+					"name": "nije dodan",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "16",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"korIme\": \"avucic\",\r\n        \"ime\": \"Ante\",\r\n        \"prezime\": \"Vučić\",\r\n        \"lozinka\": \"123456\",\r\n        \"email\": \"avucic@foi.hr\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Korisnik nije dodan."
+				}
+			]
+		},
+		{
+			"name": "dajKorisnika",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "korisnik",
+						"value": "pkos",
+						"type": "text"
+					},
+					{
+						"key": "zeton",
+						"value": "39",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici/piljeg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tskobic-aplikacija_3",
+						"api",
+						"korisnici",
+						"piljeg"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "korisnik ne postoji",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici/aantic",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici",
+								"aantic"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Traženi korisnik ne postoji."
+				},
+				{
+					"name": "korisnik vraćen",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici/piljeg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici",
+								"piljeg"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"email\": \"psiljeg@foi.hr\",\r\n    \"ime\": \"Petar\",\r\n    \"korIme\": \"piljeg\",\r\n    \"lozinka\": \"123456\",\r\n    \"prezime\": \"Šiljeg\"\r\n}"
+				},
+				{
+					"name": "žeton ne postoji",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "39",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici/piljeg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici",
+								"piljeg"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton ne postoji."
+				},
+				{
+					"name": "žeton ne pripada",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "39",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici/piljeg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici",
+								"piljeg"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton ne pripada korisniku."
+				},
+				{
+					"name": "status žetona nevažeći",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "39",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici/piljeg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici",
+								"piljeg"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Status žetona nije važeći."
+				},
+				{
+					"name": "žeton istekao",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "39",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici/piljeg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici",
+								"piljeg"
+							]
+						}
+					},
+					"status": "Request Timeout",
+					"code": 408,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Vrijeme trajanja žetona je isteklo."
+				}
+			]
+		},
+		{
+			"name": "dajGrupeKorisnika",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "korisnik",
+						"value": "pkos",
+						"type": "text"
+					},
+					{
+						"key": "zeton",
+						"value": "39",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici/dlasta/grupe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tskobic-aplikacija_3",
+						"api",
+						"korisnici",
+						"dlasta",
+						"grupe"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "žeton ne postoji",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici/dlasta/grupe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici",
+								"dlasta",
+								"grupe"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton ne postoji."
+				},
+				{
+					"name": "žeton ne pripada",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici/dlasta/grupe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici",
+								"dlasta",
+								"grupe"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Žeton ne pripada korisniku."
+				},
+				{
+					"name": "status žetona nevažeći",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici/dlasta/grupe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici",
+								"dlasta",
+								"grupe"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Status žetona nije važeći."
+				},
+				{
+					"name": "žeton istekao",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici/dlasta/grupe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici",
+								"dlasta",
+								"grupe"
+							]
+						}
+					},
+					"status": "Request Timeout",
+					"code": 408,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Vrijeme trajanja žetona je isteklo."
+				},
+				{
+					"name": "dohvaćanje nije uspjelo",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici/dlasta/grupe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici",
+								"dlasta",
+								"grupe"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Dohvaćanje grupa za proslijeđenog korisnika nije usjpelo."
+				},
+				{
+					"name": "grupe korisnika",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "korisnik",
+								"value": "pkos",
+								"type": "text"
+							},
+							{
+								"key": "zeton",
+								"value": "39",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tskobic-aplikacija_3/api/korisnici/dlasta/grupe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tskobic-aplikacija_3",
+								"api",
+								"korisnici",
+								"dlasta",
+								"grupe"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "[\r\n    {\r\n        \"grupa\": \"nwtis\",\r\n        \"naziv\": \"NWTiS korisnik\"\r\n    }\r\n]"
+				}
+			]
+		}
+	]
+}

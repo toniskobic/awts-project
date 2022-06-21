@@ -94,8 +94,12 @@ public class SocketServerKlijent {
 			Logger.getLogger(SocketServerKlijent.class.getName()).log(Level.SEVERE, null, e);
 		} finally {
 			try {
-				isr.close();
-				osw.close();
+				if (isr != null) {
+					isr.close();
+				}
+				if (osw != null) {
+					osw.close();
+				}
 			} catch (IOException e) {
 				Logger.getLogger(SocketServerKlijent.class.getName()).log(Level.SEVERE, null, e);
 			}
