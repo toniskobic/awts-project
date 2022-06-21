@@ -3,10 +3,12 @@ package org.foi.nwtis.tskobic.aplikacija_6.jpa.entiteti;
 import java.io.Serializable;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
 
 
 /**
@@ -14,13 +16,16 @@ import jakarta.persistence.NamedQuery;
  * 
  */
 @Entity
+@Table(name="GRUPE")
 @NamedQuery(name="Grupe.findAll", query="SELECT g FROM Grupe g")
 public class Grupe implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(unique=true, nullable=false, length=20)
 	private String grupa;
 
+	@Column(length=55)
 	private String naziv;
 
 	//bi-directional many-to-many association to Korisnici

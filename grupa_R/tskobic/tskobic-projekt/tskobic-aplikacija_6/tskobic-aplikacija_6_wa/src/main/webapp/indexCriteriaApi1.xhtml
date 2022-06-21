@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
+	<h:head>
+		<title>Pregled korisnika Criteria API</title>
+		<h:outputStylesheet library="css" name="dizajn.css" />
+	</h:head>
+	<h:body>
+		<h2>Pregled korisnika Criteria API</h2>
+		<br />
+		<h:link outcome="index.xhtml" value="Početak" />
+		<h:panelGrid columns="2">
+			<h:panelGroup>
+				<h:form id="form1">
+					<h:dataTable id="korisnici" style="vertical-align: top;"
+						value="#{korisniciZrnoCriteriaApi.korisnici}" var="k"
+						styleClass="authorTable" headerClass="authorTableHeader"
+						rowClasses="authorTableOddRow,authorTableEvenRow">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Korisnik" />
+							</f:facet>
+							<h:outputText value="#{k.korisnik}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Prezime" />
+							</f:facet>
+							<h:outputText value="#{k.prezime}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Ime" />
+							</f:facet>
+							<h:outputText value="#{k.ime}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Grupe" />
+							</f:facet>
+							<h:commandButton value=" Pregled ">
+								<f:ajax event="click" render="grupe" immediate="true"
+									listener="#{korisniciZrnoCriteriaApi.odabirKorisnika(k.korisnik)}" />
+							</h:commandButton>
+						</h:column>
+					</h:dataTable>
+				</h:form>
+			</h:panelGroup>
+			<h:panelGroup>
+				<h:dataTable id="grupe" style="vertical-align: top;"
+					value="#{korisniciZrnoCriteriaApi.korisnik.grupes}" var="g"
+					styleClass="authorTable" headerClass="authorTableHeader"
+					rowClasses="authorTableOddRow,authorTableEvenRow">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Grupa" />
+						</f:facet>
+						<h:outputText value="#{g.grupa}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Naziv" />
+						</f:facet>
+						<h:outputText value="#{g.naziv}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Broj članova" />
+						</f:facet>
+						<h:outputText value="#{g.korisnicis.size()}" />
+					</h:column>
+				</h:dataTable>
+			</h:panelGroup>
+		</h:panelGrid>
+	</h:body>
+</f:view>
+</html>

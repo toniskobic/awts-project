@@ -3,12 +3,14 @@ package org.foi.nwtis.tskobic.aplikacija_6.jpa.entiteti;
 import java.io.Serializable;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 
 /**
@@ -16,22 +18,27 @@ import jakarta.persistence.OneToMany;
  * 
  */
 @Entity
+@Table(name="PUTOVANJA")
 @NamedQuery(name="Putovanja.findAll", query="SELECT p FROM Putovanja p")
 public class Putovanja implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(unique=true, nullable=false)
 	private int id;
 
+	@Column(nullable=false, length=10)
 	private String aerodrompocetni;
 
+	@Column(nullable=false, length=10)
 	private String aerodromzavrsni;
 
+	@Column(nullable=false)
 	private int vrijemeprvogleta;
 
 	//bi-directional many-to-one association to Korisnici
 	@ManyToOne
-	@JoinColumn(name="KORISNIK")
+	@JoinColumn(name="KORISNIK", nullable=false)
 	private Korisnici korisnici;
 
 	//bi-directional many-to-one association to PutovanjaLetovi
