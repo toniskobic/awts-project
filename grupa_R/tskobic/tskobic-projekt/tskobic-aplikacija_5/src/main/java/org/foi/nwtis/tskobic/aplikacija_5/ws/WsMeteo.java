@@ -18,7 +18,7 @@ import jakarta.xml.ws.WebServiceContext;
 import jakarta.xml.ws.handler.MessageContext;
 
 /**
- * Klasa WsMeteo
+ * Klasa WsMeteo.
  */
 @WebService(serviceName = "meteo")
 public class WsMeteo {
@@ -31,7 +31,7 @@ public class WsMeteo {
 	 * Daje meteorološke podatke za određeni aeodrom.
 	 *
 	 * @param icao icao aerodroma
-	 * @return the meteo podaci
+	 * @return meteo podaci
 	 */
 	@WebMethod
 	public MeteoPodaci dajMeteo(@WebParam(name = "icao") String icao) {

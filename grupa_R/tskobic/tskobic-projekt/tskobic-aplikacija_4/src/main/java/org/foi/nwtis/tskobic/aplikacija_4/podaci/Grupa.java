@@ -5,6 +5,12 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
+/**
+ * Klasa Grupa.
+ *
+ * @param grupa grupa
+ * @param naziv naziv
+ */
 @AllArgsConstructor
 public class Grupa {
 

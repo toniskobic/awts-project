@@ -84,6 +84,7 @@ public class AerodromiPolasciDAO {
 	 *
 	 * @param al klasa koja predstavlja avion u letu
 	 * @param pbp postavke baze podataka
+	 * @param con veza na bazu podataka
 	 * @return true, ako je uspješno dodavanje
 	 */
 	public boolean dodajAerodromPolasci(AvionLeti al, PostavkeBazaPodataka pbp, Connection con) {

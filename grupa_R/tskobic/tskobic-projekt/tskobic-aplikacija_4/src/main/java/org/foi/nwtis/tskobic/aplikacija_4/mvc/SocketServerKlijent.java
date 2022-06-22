@@ -18,11 +18,11 @@ import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.Response;
 
 /**
- * Klasa SocketServerKlijent koja preuzima podatke sa socket server-a.
+ * Klasa SocketServerKlijent koja preuzima podatke sa poslužitelja na utičnici
  */
 public class SocketServerKlijent {
 
-	/** postavke baze podataka. */
+	/** Postavke baze podataka. */
 	PostavkeBazaPodataka konfig;
 
 	/**
@@ -34,6 +34,12 @@ public class SocketServerKlijent {
 		this.konfig = (PostavkeBazaPodataka) context.getAttribute("Postavke");
 	}
 
+	/**
+	 * Šalje naredbu poslužitelju na utičnici.
+	 *
+	 * @param komanda komanda
+	 * @return odgovor
+	 */
 	public String posaljiNaredbu(String komanda) {
 		String adresa = konfig.dajPostavku("server.adresa");
 		int port = Integer.valueOf(konfig.dajPostavku("server.port"));
@@ -44,6 +50,13 @@ public class SocketServerKlijent {
 		return odgovorPosluzitelja;
 	}
 
+	/**
+	 * Učitava aerodrome u kolekciju aerodroma na poslužitelju na utičnici.
+	 *
+	 * @param korisnik korisnik
+	 * @param zeton    žeton
+	 * @return odgovor
+	 */
 	public String ucitajAerodrome(String korisnik, int zeton) {
 		Client client = ClientBuilder.newClient();
 
@@ -64,7 +77,7 @@ public class SocketServerKlijent {
 	 * @param port    broj porta
 	 * @param cekanje maksimalno čekanje na odgovor poslužitelja
 	 * @param komanda komanda
-	 * @return the string
+	 * @return odgovor poslužitelja
 	 */
 	public String posaljiKomandu(String adresa, int port, int cekanje, String komanda) {
 		InputStreamReader isr = null;

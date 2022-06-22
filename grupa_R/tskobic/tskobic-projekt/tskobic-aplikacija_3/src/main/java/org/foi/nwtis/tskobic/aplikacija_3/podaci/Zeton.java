@@ -10,6 +10,15 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
+/**
+ * Klasa Zeton.
+ *
+ * @param id id
+ * @param korisnik korisnik
+ * @param status status
+ * @param vrijemeKreiranja vrijeme kreiranja
+ * @param vrijemeIsteka vrijeme isteka
+ */
 @AllArgsConstructor
 public class Zeton {
 
@@ -24,8 +33,8 @@ public class Zeton {
     
     @Getter
     @Setter
-    private int status;
-    
+    private int status; 
+
     @Getter
     @Setter
     @NonNull
@@ -36,7 +45,12 @@ public class Zeton {
     @NonNull
     private String vrijemeIsteka;
     
-    
+    /**
+     * Provjerava vlasništvo žetona.
+     *
+     * @param uneseniKorisnik uneseni korisnik
+     * @return true, ako žeton pripada unesenom korisniku
+     */
     public boolean provjeriVlasnistvoZetona(String uneseniKorisnik) {
     	if(korisnik.equals(uneseniKorisnik)) {
     		return true;
@@ -45,6 +59,11 @@ public class Zeton {
     	}
     }
     
+    /**
+     * Provjerava vrijeme žetona.
+     *
+     * @return true, ako žeton nije istekao
+     */
     public boolean provjeriVrijemeZetona() {
     	long vrijeme = izvrsiDatumPretvaranje(this.vrijemeIsteka);
     	long trenutnoVrijeme = new Date().getTime();
@@ -56,6 +75,11 @@ public class Zeton {
 		}
     }
     
+    /**
+     * Provjerava aktivnost žeton.
+     *
+     * @return true, ako je žeton aktivan
+     */
     public boolean provjeriAktivnostZetona() {
     	if(status == 1 && provjeriVrijemeZetona()) {
     		return true;
@@ -65,12 +89,18 @@ public class Zeton {
     }
     
     
+	/**
+	 * Izvršava pretvaranja datum u broj milisekundi.
+	 *
+	 * @param datum datum
+	 * @return broj milisekundi
+	 */
 	private long izvrsiDatumPretvaranje(String datum) {
-	    long millisSinceEpoch = LocalDateTime.parse(datum, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+	    long milisekunde = LocalDateTime.parse(datum, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
 	            .atZone(ZoneId.systemDefault())
 	            .toInstant()
 	            .toEpochMilli();
 	    
-	    return millisSinceEpoch;
+	    return milisekunde;
 	}
 }

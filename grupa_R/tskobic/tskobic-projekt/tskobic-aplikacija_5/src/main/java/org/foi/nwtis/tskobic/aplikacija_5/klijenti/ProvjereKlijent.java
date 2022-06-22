@@ -10,23 +10,31 @@ import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.Response;
 
+// TODO: Auto-generated Javadoc
 /**
  * Klasa ProvjereKlijent koja preuzima podatke od REST APIa.
  */
 public class ProvjereKlijent {
 
-	/** postavke baze podataka. */
+	/** Postavke baze podataka. */
 	PostavkeBazaPodataka konfig;
 
 	/**
 	 * Konstruktor.
 	 *
-	 * @param context kontekst servleta
+	 * @param konfig postavke baza podataka
 	 */
 	public ProvjereKlijent(PostavkeBazaPodataka konfig) {
 		this.konfig = konfig;
 	}
 
+	/**
+	 * Autentificira korisnika.
+	 *
+	 * @param korisnik korisnik
+	 * @param lozinka lozinka
+	 * @return žeton
+	 */
 	public ZetonOdgovor autentificirajKorisnika(String korisnik, String lozinka) {
 		Client client = ClientBuilder.newClient();
 

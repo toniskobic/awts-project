@@ -19,7 +19,7 @@ import jakarta.xml.ws.WebServiceContext;
 import jakarta.xml.ws.handler.MessageContext;
 
 /**
- * Klasa WsAerodromi
+ * Klasa WsAerodromi.
  */
 @WebService(serviceName = "aerodromi")
 public class WsAerodromi {
@@ -28,6 +28,16 @@ public class WsAerodromi {
 	@Resource
 	private WebServiceContext wsContext;
 
+	/**
+	 * Daj polaske od unesenog dana do unesenog dana.
+	 *
+	 * @param korisnik korisnik
+	 * @param zeton žeton
+	 * @param icao icao aerodroma
+	 * @param danOd dan od
+	 * @param danDo dan do
+	 * @return lista polazaka
+	 */
 	@WebMethod
 	public List<AvionLeti> dajPolaskeDan(@WebParam(name = "korisnik") String korisnik,
 			@WebParam(name = "zeton") String zeton, @WebParam(name = "icao") String icao,
@@ -41,6 +51,16 @@ public class WsAerodromi {
 		return aerodromPolasci;
 	}
 
+	/**
+	 * Daj polaske od unesenog broja sekundi do unesenog broja sekundi od 01.01.1970.
+	 *
+	 * @param korisnik korisnik
+	 * @param zeton žeton
+	 * @param icao icao aerodroma
+	 * @param vrijemeOd vrijeme od
+	 * @param vrijemeDo vrijeme do
+	 * @return lista polazaka
+	 */
 	@WebMethod
 	public List<AvionLeti> dajPolaskeVrijeme(@WebParam(name = "korisnik") String korisnik,
 			@WebParam(name = "zeton") String zeton, @WebParam(name = "icao") String icao,
@@ -54,6 +74,14 @@ public class WsAerodromi {
 		return aerodromPolasci;
 	};
 
+	/**
+	 * Dodaje aerodrom za preuzimanje.
+	 *
+	 * @param korisnik korisnik
+	 * @param zeton žeton
+	 * @param icao icao aerodroma
+	 * @return true, ako je uspješno
+	 */
 	@WebMethod
 	public boolean dodajAerodromPreuzimanje(@WebParam(name = "korisnik") String korisnik,
 			@WebParam(name = "zeton") String zeton, @WebParam(name = "icao") String icao) {
@@ -75,7 +103,7 @@ public class WsAerodromi {
 	 * Vraća trenutno vrijeme u proslijeđenom formatu.
 	 *
 	 * @param format format
-	 * @return the string
+	 * @return trenutno vrijeme u stringu
 	 */
 	private String trenutnoVrijeme(String format) {
 		SimpleDateFormat sdf = new SimpleDateFormat(format);

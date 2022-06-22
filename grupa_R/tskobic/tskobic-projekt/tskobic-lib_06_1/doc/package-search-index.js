@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.foi.nwtis.tskobic.vjezba_06.konfiguracije.bazaPodataka"}];updateSearchResults();

@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 import jakarta.inject.Qualifier;
 
 /**
- * Sučlje Pokretanje
+ * Sučelje Pokretanje
  */
 @Qualifier
 @Retention(RUNTIME)

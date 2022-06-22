@@ -22,7 +22,7 @@ import jakarta.ws.rs.core.Response;
  */
 public class KorisniciKlijent {
 
-	/** postavke baze podataka. */
+	/** Postavke baze podataka. */
 	PostavkeBazaPodataka konfig;
 
 	/**
@@ -34,6 +34,14 @@ public class KorisniciKlijent {
 		this.konfig = (PostavkeBazaPodataka) context.getAttribute("Postavke");
 	}
 
+	/**
+	 * Dodaje korisnika.
+	 *
+	 * @param korisnik korisnik koji šalje zahthev
+	 * @param zeton žeton
+	 * @param k proslijeđeni korisnik
+	 * @return odgovor REST APIa
+	 */
 	public String dodajKorisnika(String korisnik, int zeton, Korisnik k) {
 		Client client = ClientBuilder.newClient();
 
@@ -48,6 +56,13 @@ public class KorisniciKlijent {
 		return odgovor;
 	}
 
+	/**
+	 * Daje sve korisnike.
+	 *
+	 * @param korisnik korisnik
+	 * @param zeton žeton
+	 * @return lista korisnika
+	 */
 	public List<Korisnik> dajSveKorisnike(String korisnik, int zeton) {
 		Client client = ClientBuilder.newClient();
 
@@ -65,6 +80,14 @@ public class KorisniciKlijent {
 		return korisnici;
 	}
 
+	/**
+	 * Daje grupe korisnika.
+	 *
+	 * @param korisnik korisnik
+	 * @param zeton žeton
+	 * @param korisnikGrupe korisnik za kojeg se traže grupe
+	 * @return lista grupa
+	 */
 	public List<Grupa> dajGrupeKorisnika(String korisnik, int zeton, String korisnikGrupe) {
 		Client client = ClientBuilder.newClient();
 

@@ -11,7 +11,7 @@ import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 
 /**
- * Klasa slu�a� SlusacAplikacije.
+ * Klasa slušač SlusacAplikacije.
  */
 @WebListener
 public class SlusacAplikacije implements ServletContextListener {

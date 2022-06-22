@@ -57,6 +57,7 @@ public class ServerGlavni {
 	 *
 	 * @param port       broj porta
 	 * @param maksCekaca maksimalan broj čekača
+	 * @param maksCekanje the maks cekanje
 	 */
 	public ServerGlavni(int port, int maksCekaca, int maksCekanje) {
 		super();
@@ -153,24 +154,30 @@ public class ServerGlavni {
 		/** Veza. */
 		Socket veza = null;
 
+		/** Dozvoljeni izraz za naredbu status. */
 		String statusIzraz = "^STATUS$";
 
+		/** Dozvoljeni izraz za naredbu prekida rada poslužitelja. */
 		String prekid = "^QUIT$";
 
+		/** Dozvoljeni izraz za naredbu inicijalizacije poslužitelja. */
 		String inicijalizacija = "^INIT$";
 
+		/** Početak naredbe za učitavanje pdoataka. */
 		String ucitavanje = "LOAD";
 
+		/** Dozvoljeni izraz za računanje udaljenosti dva aerodroma. */
 		String udaljenostIcao = "^DISTANCE ([A-Z]{4}) ([A-Z]{4})$";
 
+		/** Dozvoljeni izraz za čišćenje lokalne kolekcije aerodroma. */
 		String ocisti = "^CLEAR$";
 
 		/**
-		 * Konstruktor klase
+		 * Konstruktor klase.
 		 *
 		 * @param serverGlavni objekt klase ServerGlavni
-		 * @param konfig       konfiguracijski podaci
 		 * @param veza         veza
+		 * @param ss the ss
 		 */
 		public DretvaZahtjeva(ServerGlavni serverGlavni, Socket veza, ServerSocket ss) {
 			super("tskobic_" + (brojAktivnihDretvi + 1));
@@ -183,7 +190,7 @@ public class ServerGlavni {
 		}
 
 		/**
-		 * Metoda za pokretanje dretve
+		 * Metoda za pokretanje dretve.
 		 */
 		@Override
 		public synchronized void start() {
@@ -191,7 +198,7 @@ public class ServerGlavni {
 		}
 
 		/**
-		 * Glavna metoda za rad dretve
+		 * Glavna metoda za rad dretve.
 		 */
 		@Override
 		public void run() {
@@ -266,7 +273,7 @@ public class ServerGlavni {
 		 *
 		 * @param komanda        komanda
 		 * @param regularniIzraz dozvoljeni izraz
-		 * @return true, if successful
+		 * @return true, ako je uspješna provjera
 		 */
 		public boolean provjeraSintakseObrada(String komanda, String regularniIzraz) {
 			Pattern izraz = Pattern.compile(regularniIzraz);
@@ -306,6 +313,12 @@ public class ServerGlavni {
 			super.interrupt();
 		}
 
+		/**
+		 * Metoda za provjeravanje sintakse komande i poziva metoda za izvršavanje.
+		 *
+		 * @param osw izlazni tok podataka
+		 * @param komanda komanda
+		 */
 		public void izvrsiNaredbu(OutputStreamWriter osw, String komanda) {
 			if (provjeraSintakseObrada(komanda, prekid)) {
 				izvrsiPrekid(osw, komanda);
@@ -324,6 +337,12 @@ public class ServerGlavni {
 			}
 		}
 
+		/**
+		 * Izvršava naredbu čišćenja lokalne kolekcije poslužitelja.
+		 *
+		 * @param osw izlazni tok podataka
+		 * @param komanda komanda
+		 */
 		private void izvrsiOcisti(OutputStreamWriter osw, String komanda) {
 			synchronized (this) {
 				aerodromi.clear();
@@ -333,6 +352,12 @@ public class ServerGlavni {
 			ispisPoruke(osw, "OK");
 		}
 
+		/**
+		 * Izvršava naredbu učitavanja kolekcije aerodroma.
+		 *
+		 * @param osw izlazni tok podataka
+		 * @param komanda komanda
+		 */
 		private void izvrsiUcitavanje(OutputStreamWriter osw, String komanda) {
 			synchronized (this) {
 				statusPosluzitelja = 2;
@@ -363,6 +388,12 @@ public class ServerGlavni {
 			}
 		}
 
+		/**
+		 * Izvršava inicijalizaciju poslužitelja.
+		 *
+		 * @param osw izlazni tok podataak
+		 * @param komanda komanda
+		 */
 		private void izvrsiInicijalizaciju(OutputStreamWriter osw, String komanda) {
 			synchronized (this) {
 				statusPosluzitelja = 1;
@@ -371,11 +402,23 @@ public class ServerGlavni {
 			ispisPoruke(osw, "OK");
 		}
 
+		/**
+		 * Izvršava prekid rada poslužitelja.
+		 *
+		 * @param osw izlazni tok podataka
+		 * @param komanda komanda
+		 */
 		private void izvrsiPrekid(OutputStreamWriter osw, String komanda) {
 			ispisPoruke(osw, "OK");
 			interrupt();
 		}
 
+		/**
+		 * Ispisuje status poslužitelja na izlazni tok podataka.
+		 *
+		 * @param osw izlazni tok podataka
+		 * @param komanda komanda
+		 */
 		private void izvrsiStatus(OutputStreamWriter osw, String komanda) {
 			int status;
 			synchronized (this) {

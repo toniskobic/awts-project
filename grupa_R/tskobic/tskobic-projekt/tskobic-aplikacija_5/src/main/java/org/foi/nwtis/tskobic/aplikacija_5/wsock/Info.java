@@ -35,7 +35,7 @@ public class Info {
 	/**
 	 * Metoda koja svim korisnicima šalje proslijeđenu poruku.
 	 *
-	 * @param poruka poruka
+	 * @param info the info
 	 */
 	static public void dajMeteo(String info) {
 		for (Session sesija : sesije) {
@@ -43,7 +43,7 @@ public class Info {
 				try {
 					sesija.getBasicRemote().sendText(info);
 				} catch (IOException e) {
-					System.out.println("Pogre�ka kod slanja poruke za sesiju: " + sesija.getId());
+					System.out.println("Pogreška kod slanja poruke za sesiju: " + sesija.getId());
 				}
 			}
 		}
@@ -53,7 +53,7 @@ public class Info {
 	 * Metoda koja se izvršava pri otvaranju web socket sesije.
 	 *
 	 * @param sesija sesija
-	 * @param konfig konfiguracija krajnje to�ke
+	 * @param konfig konfiguracija krajnje točke
 	 */
 	@OnOpen
 	public void otvori(Session sesija, EndpointConfig konfig) {
@@ -101,7 +101,7 @@ public class Info {
 	 */
 	@OnError
 	public void pogreska(Session sesija, Throwable iznimka) {
-		System.out.println("Veza: " + sesija.getId() + " Pogre�ka: " + iznimka.getMessage());
+		System.out.println("Veza: " + sesija.getId() + " Pogreška: " + iznimka.getMessage());
 	}
 
 	/**
@@ -117,6 +117,12 @@ public class Info {
 		return datum;
 	}
 
+	/**
+	 * Dohvaća praćene aerodrome.
+	 *
+	 * @param pbp postavke baza podataka
+	 * @return lista praćenih aerodroma
+	 */
 	private List<Aerodrom> dajPraceneAerodrome(PostavkeBazaPodataka pbp) {
 		String sustavKorisnik = pbp.dajPostavku("sustav.korisnik");
 		String sustavLozinka = pbp.dajPostavku("sustav.lozinka");

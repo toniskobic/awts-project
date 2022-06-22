@@ -40,10 +40,6 @@ public class Korisnici implements Serializable {
 	@Column(length=25)
 	private String prezime;
 
-	//bi-directional many-to-one association to Putovanja
-	@OneToMany(mappedBy="korisnici")
-	private List<Putovanja> putovanjas;
-
 	//bi-directional many-to-many association to Grupe
 	@ManyToMany
 	@JoinTable(
@@ -56,6 +52,10 @@ public class Korisnici implements Serializable {
 			}
 		)
 	private List<Grupe> grupes;
+
+	//bi-directional many-to-one association to Putovanja
+	@OneToMany(mappedBy="korisnici")
+	private List<Putovanja> putovanjas;
 
 	public Korisnici() {
 	}
@@ -100,6 +100,14 @@ public class Korisnici implements Serializable {
 		this.prezime = prezime;
 	}
 
+	public List<Grupe> getGrupes() {
+		return this.grupes;
+	}
+
+	public void setGrupes(List<Grupe> grupes) {
+		this.grupes = grupes;
+	}
+
 	public List<Putovanja> getPutovanjas() {
 		return this.putovanjas;
 	}
@@ -120,14 +128,6 @@ public class Korisnici implements Serializable {
 		putovanja.setKorisnici(null);
 
 		return putovanja;
-	}
-
-	public List<Grupe> getGrupes() {
-		return this.grupes;
-	}
-
-	public void setGrupes(List<Grupe> grupes) {
-		this.grupes = grupes;
 	}
 
 }

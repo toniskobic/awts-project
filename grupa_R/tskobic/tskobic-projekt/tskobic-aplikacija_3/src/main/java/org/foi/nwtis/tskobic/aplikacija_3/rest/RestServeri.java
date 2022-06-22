@@ -31,6 +31,9 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+/**
+ * Klasa RestServeri za URI putanju serveri.
+ */
 @Path("serveri")
 public class RestServeri {
 
@@ -38,6 +41,13 @@ public class RestServeri {
 	@Context
 	private ServletContext context;
 
+	/**
+	 * Daje status poslužitelja na utičnici.
+	 *
+	 * @param korisnik korisnik
+	 * @param token žeton
+	 * @return odgovor
+	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response dajStatus(@HeaderParam("korisnik") String korisnik, @HeaderParam("zeton") String token) {
@@ -72,6 +82,14 @@ public class RestServeri {
 		return odgovor;
 	}
 
+	/**
+	 * Šalje naredbu poslužitelju na utičnici.
+	 *
+	 * @param korisnik korisnik
+	 * @param token žeton
+	 * @param komanda komanda
+	 * @return odgovor
+	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("{komanda}")
@@ -108,6 +126,13 @@ public class RestServeri {
 		return odgovor;
 	}
 
+	/**
+	 * Učitava aerodrome u kolekciju na poslužitelju na utičnici.
+	 *
+	 * @param korisnik korisnik
+	 * @param token žeton
+	 * @return odgovor
+	 */
 	@POST
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Consumes({ MediaType.APPLICATION_JSON })
@@ -152,6 +177,13 @@ public class RestServeri {
 		return odgovor;
 	}
 
+	/**
+	 * Provjerava žeton.
+	 *
+	 * @param zeton žeton
+	 * @param korisnik korisnik
+	 * @return odgovor
+	 */
 	private Response provjeriZeton(Zeton zeton, String korisnik) {
 		Response odgovor = null;
 
@@ -177,13 +209,13 @@ public class RestServeri {
 	}
 
 	/**
-	 * Slanje komande poslužitelju.
+	 * Slanje komande poslužitelju na utičnici.
 	 *
 	 * @param adresa  adresa
 	 * @param port    broj porta
 	 * @param cekanje maksimalno čekanje na odgovor poslužitelja
 	 * @param komanda komanda
-	 * @return the string
+	 * @return odgovor poslužitelja u obliku stringa
 	 */
 	public String posaljiKomandu(String adresa, int port, int cekanje, String komanda) {
 		InputStreamReader isr = null;
@@ -227,6 +259,12 @@ public class RestServeri {
 		return null;
 	}
 
+	/**
+	 * Pretvara listu aerodroma u JSON format.
+	 *
+	 * @param aerodromi aerodromi
+	 * @return JSON format u stringu
+	 */
 	private String pretvoriUJSON(List<Aerodrom> aerodromi) {
 		Gson gson = new Gson();
 

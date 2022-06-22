@@ -27,7 +27,7 @@ public class AerodromiProblemiDAO {
 	 * Dohvaća sve problema aerodroma.
 	 *
 	 * @param pbp postavke baze podataka
-	 * @return the lista problema aerodroma
+	 * @return lista problema aerodroma
 	 */
 	public List<AerodromProblem> dohvatiSveProbleme(PostavkeBazaPodataka pbp) {
 		String url = pbp.getServerDatabase() + pbp.getUserDatabase();

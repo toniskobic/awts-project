@@ -17,8 +17,18 @@ import java.util.logging.Logger;
 
 import org.foi.nwtis.tskobic.vjezba_06.konfiguracije.bazaPodataka.PostavkeBazaPodataka;
 
+/**
+ * Klasa ZetoniDAO za rad s bazom podataka.
+ */
 public class ZetoniDAO {
 
+	/**
+	 * Kreira žeton.
+	 *
+	 * @param korisnik korisnik
+	 * @param pbp postavke baza podataka
+	 * @return žeton
+	 */
 	public Zeton kreirajZeton(String korisnik, PostavkeBazaPodataka pbp) {
 		String url = pbp.getServerDatabase() + pbp.getUserDatabase();
 		String bpkorisnik = pbp.getUserUsername();
@@ -58,6 +68,13 @@ public class ZetoniDAO {
 		return null;
 	}
 	
+	/**
+	 * Dohvaća aktivne žetone.
+	 *
+	 * @param unos proslijeđeni korisnik
+	 * @param pbp postavke baza podataka
+	 * @return lista žeton
+	 */
 	public List<Zeton> dohvatiAktivneZetone(String unos, PostavkeBazaPodataka pbp) {
 		String url = pbp.getServerDatabase() + pbp.getUserDatabase();
 		String bpkorisnik = pbp.getUserUsername();
@@ -103,6 +120,13 @@ public class ZetoniDAO {
 		return null;
 	}
 
+	/**
+	 * Dohvaća žeton.
+	 *
+	 * @param unos unos
+	 * @param pbp postavke baza podataka
+	 * @return žeton
+	 */
 	public Zeton dohvatiZeton(String unos, PostavkeBazaPodataka pbp) {
 		String url = pbp.getServerDatabase() + pbp.getUserDatabase();
 		String bpkorisnik = pbp.getUserUsername();
@@ -141,6 +165,14 @@ public class ZetoniDAO {
 		return null;
 	}
 	
+	/**
+	 * Mijenja status žetona.
+	 *
+	 * @param unos unos
+	 * @param token žeton
+	 * @param pbp postavke baza podataka
+	 * @return true, ako je uspješno
+	 */
 	public boolean promijeniStatusZetona(int unos, String token, PostavkeBazaPodataka pbp) {
 		String url = pbp.getServerDatabase() + pbp.getUserDatabase();
 		String bpkorisnik = pbp.getUserUsername();
@@ -170,6 +202,15 @@ public class ZetoniDAO {
 		return false;
 	}
 	
+	/**
+	 * Mijenja status žetona.
+	 *
+	 * @param unos unos
+	 * @param token žeton
+	 * @param pbp postavke baza podataka
+	 * @param con veza na bazu podataka
+	 * @return true, ako je uspješno
+	 */
 	public boolean promijeniStatusZetona(int unos, String token, PostavkeBazaPodataka pbp, Connection con) {
 		String url = pbp.getServerDatabase() + pbp.getUserDatabase();
 		String upit = "UPDATE zeton SET status = ? WHERE id = ?;";
@@ -197,13 +238,19 @@ public class ZetoniDAO {
 	}
 	
 	
+	/**
+	 * Izvršava pretvaranje datuma.
+	 *
+	 * @param datum datum
+	 * @return milisekunde
+	 */
 	private long izvrsiDatumPretvaranje(String datum) {
-	    long millisSinceEpoch = LocalDateTime.parse(datum, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+	    long milisekunde = LocalDateTime.parse(datum, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
 	            .atZone(ZoneId.systemDefault())
 	            .toInstant()
 	            .toEpochMilli();
 	    
-	    return millisSinceEpoch;
+	    return milisekunde;
 	}
 
 }

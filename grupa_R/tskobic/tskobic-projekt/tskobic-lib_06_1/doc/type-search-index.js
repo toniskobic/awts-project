@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"org.foi.nwtis.tskobic.vjezba_06.konfiguracije.bazaPodataka","l":"KonfiguracijaBP"},{"p":"org.foi.nwtis.tskobic.vjezba_06.konfiguracije.bazaPodataka","l":"PostavkeBazaPodataka"}];updateSearchResults();

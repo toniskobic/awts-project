@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.foi.nwtis.tskobic.aplikacija_6.jpa.entiteti"}];updateSearchResults();

@@ -92,6 +92,11 @@ public class Osvjezivac extends Thread {
 		return datum;
 	}
 	
+	/**
+	 * Dohvaća praćene aerodrome.
+	 *
+	 * @return lista praćenih aerodroma
+	 */
 	private List<Aerodrom> dajPraceneAerodrome() {
 		String sustavKorisnik = konfig.dajPostavku("sustav.korisnik");
 		String sustavLozinka = konfig.dajPostavku("sustav.lozinka");

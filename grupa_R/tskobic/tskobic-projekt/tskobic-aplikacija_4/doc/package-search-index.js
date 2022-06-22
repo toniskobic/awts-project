@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.foi.nwtis.tskobic.aplikacija_4.mvc"},{"l":"org.foi.nwtis.tskobic.aplikacija_4.podaci"},{"l":"org.foi.nwtis.tskobic.aplikacija_4.slusaci"}];updateSearchResults();

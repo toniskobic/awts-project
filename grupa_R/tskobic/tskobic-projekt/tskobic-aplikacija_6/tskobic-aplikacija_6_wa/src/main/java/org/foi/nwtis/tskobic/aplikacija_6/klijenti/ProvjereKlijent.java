@@ -21,12 +21,19 @@ public class ProvjereKlijent {
 	/**
 	 * Konstruktor.
 	 *
-	 * @param context kontekst servleta
+	 * @param konfig the konfig
 	 */
 	public ProvjereKlijent(PostavkeBazaPodataka konfig) {
 		this.konfig = konfig;
 	}
 
+	/**
+	 * Autentificira korisnika.
+	 *
+	 * @param korisnik korisnik
+	 * @param lozinka lozinka
+	 * @return žeton
+	 */
 	public ZetonOdgovor autentificirajKorisnika(String korisnik, String lozinka) {
 		Client client = ClientBuilder.newClient();
 
@@ -45,6 +52,14 @@ public class ProvjereKlijent {
 		return zeton;
 	}
 	
+	/**
+	 * Deaktivira žeton.
+	 *
+	 * @param korisnik korisnik
+	 * @param lozinka lozinka
+	 * @param zeton žeton
+	 * @return odgovor poslužitelja
+	 */
 	public String deaktivirajZeton(String korisnik, String lozinka, String zeton) {
 		Client client = ClientBuilder.newClient();
 

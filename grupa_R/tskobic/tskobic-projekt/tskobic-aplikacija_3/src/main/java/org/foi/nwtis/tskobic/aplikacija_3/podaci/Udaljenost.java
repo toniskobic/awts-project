@@ -4,6 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Klasa Udaljenost.
+ *
+ * @param udaljenost udaljenost
+ */
 @AllArgsConstructor
 public class Udaljenost {
 

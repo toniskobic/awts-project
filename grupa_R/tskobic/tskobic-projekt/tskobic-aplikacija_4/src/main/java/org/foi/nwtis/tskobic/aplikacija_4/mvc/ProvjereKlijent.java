@@ -16,7 +16,7 @@ import jakarta.ws.rs.core.Response;
  */
 public class ProvjereKlijent {
 
-	/** postavke baze podataka. */
+	/** Postavke baze podataka. */
 	PostavkeBazaPodataka konfig;
 
 	/**
@@ -28,6 +28,13 @@ public class ProvjereKlijent {
 		this.konfig = (PostavkeBazaPodataka) context.getAttribute("Postavke");
 	}
 
+	/**
+	 * Autentificiraj korisnika.
+	 *
+	 * @param korisnik korisnik
+	 * @param lozinka lozinka
+	 * @return žeton
+	 */
 	public ZetonOdgovor autentificirajKorisnika(String korisnik, String lozinka) {
 		Client client = ClientBuilder.newClient();
 
@@ -45,6 +52,14 @@ public class ProvjereKlijent {
 		return zeton;
 	}
 
+	/**
+	 * Deaktivira žetone proslijeđenog korisnika.
+	 *
+	 * @param korisnik korisnik koji je poslao zahtjev
+	 * @param lozinka lozinka
+	 * @param deaktivacijaKorisnik korisnik čiji se žetoni deaktiviraju
+	 * @return odgovor
+	 */
 	public String deaktivirajZetone(String korisnik, String lozinka, String deaktivacijaKorisnik) {
 		Client client = ClientBuilder.newClient();
 
@@ -57,6 +72,14 @@ public class ProvjereKlijent {
 		return odgovor;
 	}
 	
+	/**
+	 * Deaktiviraj žeton.
+	 *
+	 * @param korisnik korisnik
+	 * @param lozinka lozinka
+	 * @param zeton žeton
+	 * @return odgovor
+	 */
 	public String deaktivirajZeton(String korisnik, String lozinka, String zeton) {
 		Client client = ClientBuilder.newClient();
 

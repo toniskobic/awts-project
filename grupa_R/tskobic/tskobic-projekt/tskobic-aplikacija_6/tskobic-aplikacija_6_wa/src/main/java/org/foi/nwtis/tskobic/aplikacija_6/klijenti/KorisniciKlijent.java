@@ -19,18 +19,25 @@ import jakarta.ws.rs.core.Response;
  */
 public class KorisniciKlijent {
 
-	/** postavke baze podataka. */
+	/** Postavke baze podataka. */
 	PostavkeBazaPodataka konfig;
 
 	/**
 	 * Konstruktor.
 	 *
-	 * @param context kontekst servleta
+	 * @param konfig the konfig
 	 */
 	public KorisniciKlijent(PostavkeBazaPodataka konfig) {
 		this.konfig = konfig;
 	}
 
+	/**
+	 * Daje sve korisnike.
+	 *
+	 * @param korisnik korisnik
+	 * @param zeton žeton
+	 * @return lista korisnika
+	 */
 	public List<Korisnik> dajSveKorisnike(String korisnik, int zeton) {
 		Client client = ClientBuilder.newClient();
 

@@ -52,9 +52,18 @@ public class RestAerodromi {
 	@Context
 	private ServletContext context;
 
+	/**
+	 * Daje sve aerodrome.
+	 *
+	 * @param request  http zahtjev
+	 * @param korisnik korisnik
+	 * @param token    žeton
+	 * @return odgovor
+	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response dajSveAerodrome(@Context HttpServletRequest request, @HeaderParam("korisnik") String korisnik, @HeaderParam("zeton") String token) {
+	public Response dajSveAerodrome(@Context HttpServletRequest request, @HeaderParam("korisnik") String korisnik,
+			@HeaderParam("zeton") String token) {
 		boolean parametar = request.getParameterMap().containsKey("preuzimanje");
 		Response odgovor = null;
 
@@ -81,6 +90,14 @@ public class RestAerodromi {
 		return odgovor;
 	}
 
+	/**
+	 * Dodaje aerodrom za pratiti.
+	 *
+	 * @param korisnik korisnik
+	 * @param token    žeton
+	 * @param sadrzaj  tijelo POST zahtjeva
+	 * @return odgovor
+	 */
 	@POST
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Consumes({ MediaType.APPLICATION_JSON })
@@ -124,10 +141,12 @@ public class RestAerodromi {
 	}
 
 	/**
-	 * Vraća aerodrom.
+	 * Vraća aerodrom za traženi icao.
 	 *
-	 * @param icao icao aerodroma
-	 * @return the odgovor
+	 * @param korisnik korisnik
+	 * @param token    žeton
+	 * @param icao     icao aerodroma
+	 * @return odgovor
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -153,6 +172,15 @@ public class RestAerodromi {
 		return odgovor;
 	}
 
+	/**
+	 * Daje udaljenost između dva aerodroma.
+	 *
+	 * @param korisnik korisnik
+	 * @param token    žeton
+	 * @param icao1    icao 1. aerodroma
+	 * @param icao2    icao 2. aerodroma
+	 * @return odgovor
+	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("{icao1}/{icao2}")
@@ -185,7 +213,17 @@ public class RestAerodromi {
 		return odgovor;
 	}
 
-
+	/**
+	 * Daje polaske aerodoma u određenom vremenskom intervalu.
+	 *
+	 * @param korisnik  korisnik
+	 * @param token     žeton
+	 * @param icao      icao aerodroma
+	 * @param vrsta     vrsta proslijeđenih podataka
+	 * @param vrijemeOd vrijeme od za koje se vraćaju podaci
+	 * @param vrijemeDo vrijeme do za koje se vraćaju podaci
+	 * @return odgovor
+	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("{icao}/polasci")
@@ -196,7 +234,7 @@ public class RestAerodromi {
 
 		PostavkeBazaPodataka konfig = (PostavkeBazaPodataka) context.getAttribute("Postavke");
 		List<AvionLeti> aerodromPolasci = null;
-		
+
 		ZetoniDAO zetoniDAO = new ZetoniDAO();
 
 		Zeton zeton = zetoniDAO.dohvatiZeton(token, konfig);
@@ -205,23 +243,34 @@ public class RestAerodromi {
 		if (odgovor == null) {
 			int odVrijeme = 0;
 			int doVrijeme = 0;
-			if(Integer.valueOf(vrsta) == 0) {
+			if (Integer.valueOf(vrsta) == 0) {
 				odVrijeme = izvrsiDatumPretvaranje(vrijemeOd);
 				doVrijeme = izvrsiDatumPretvaranje(vrijemeDo);
-			}else if(Integer.valueOf(vrsta) == 1) {
+			} else if (Integer.valueOf(vrsta) == 1) {
 				odVrijeme = Integer.valueOf(vrijemeOd);
 				doVrijeme = Integer.valueOf(vrijemeDo);
 			}
-			
+
 			AerodromiPolasciDAO aerodromiPolasciDAO = new AerodromiPolasciDAO();
 			aerodromPolasci = aerodromiPolasciDAO.dohvatiPolaskeZaInterval(icao, odVrijeme, doVrijeme, konfig);
-			
+
 			odgovor = Response.status(Response.Status.OK).entity(aerodromPolasci).build();
 		}
 
 		return odgovor;
 	}
 
+	/**
+	 * Daje dolaske aerodoma u određenom vremenskom intervalu.
+	 *
+	 * @param korisnik  korisnik
+	 * @param token     žeton
+	 * @param icao      icao aerodroma
+	 * @param vrsta     vrsta proslijeđenih podataka
+	 * @param vrijemeOd vrijeme od za koje se vraćaju podaci
+	 * @param vrijemeDo vrijeme do za koje se vraćaju podaci
+	 * @return odgovor
+	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("{icao}/dolasci")
@@ -232,7 +281,7 @@ public class RestAerodromi {
 
 		PostavkeBazaPodataka konfig = (PostavkeBazaPodataka) context.getAttribute("Postavke");
 		List<AvionLeti> aerodromDolasci = null;
-		
+
 		ZetoniDAO zetoniDAO = new ZetoniDAO();
 
 		Zeton zeton = zetoniDAO.dohvatiZeton(token, konfig);
@@ -241,24 +290,30 @@ public class RestAerodromi {
 		if (odgovor == null) {
 			int odVrijeme = 0;
 			int doVrijeme = 0;
-			if(Integer.valueOf(vrsta) == 0) {
+			if (Integer.valueOf(vrsta) == 0) {
 				odVrijeme = izvrsiDatumPretvaranje(vrijemeOd);
 				doVrijeme = izvrsiDatumPretvaranje(vrijemeDo);
-			}else if(Integer.valueOf(vrsta) == 1) {
+			} else if (Integer.valueOf(vrsta) == 1) {
 				odVrijeme = Integer.valueOf(vrijemeOd);
 				doVrijeme = Integer.valueOf(vrijemeDo);
 			}
-			
+
 			AerodromiDolasciDAO aerodromiDolasciDAO = new AerodromiDolasciDAO();
 			aerodromDolasci = aerodromiDolasciDAO.dohvatiDolaskeZaInterval(icao, odVrijeme, doVrijeme, konfig);
-			
+
 			odgovor = Response.status(Response.Status.OK).entity(aerodromDolasci).build();
 		}
 
 		return odgovor;
 	}
 
-
+	/**
+	 * Provjerava žeton.
+	 *
+	 * @param zeton    žeton
+	 * @param korisnik korisnik
+	 * @return odgovor
+	 */
 	private Response provjeriZeton(Zeton zeton, String korisnik) {
 		Response odgovor = null;
 
@@ -290,7 +345,7 @@ public class RestAerodromi {
 	 * @param port    broj porta
 	 * @param cekanje maksimalno čekanje na odgovor poslužitelja
 	 * @param komanda komanda
-	 * @return the string
+	 * @return odgovor poslužitelja u obliku stringa
 	 */
 	public String posaljiKomandu(String adresa, int port, int cekanje, String komanda) {
 		InputStreamReader isr = null;
@@ -320,10 +375,10 @@ public class RestAerodromi {
 			Logger.getLogger(RestAerodromi.class.getName()).log(Level.SEVERE, null, e);
 		} finally {
 			try {
-				if(isr != null) {
+				if (isr != null) {
 					isr.close();
 				}
-				if(osw != null) {
+				if (osw != null) {
 					osw.close();
 				}
 			} catch (IOException e) {
@@ -334,6 +389,12 @@ public class RestAerodromi {
 		return null;
 	}
 
+	/**
+	 * Pretvara JSON format u objekt klase Aerodrom.
+	 *
+	 * @param sadrzaj string u JSON formatu
+	 * @return aerodrom
+	 */
 	private Aerodrom pretvoriJSON(String sadrzaj) {
 		Gson gson = new Gson();
 
@@ -351,7 +412,7 @@ public class RestAerodromi {
 	 * Pretvara datum iz stringa u sekunde.
 	 *
 	 * @param datum datum
-	 * @return the long
+	 * @return sekunde
 	 */
 	public int izvrsiDatumPretvaranje(String datum) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");

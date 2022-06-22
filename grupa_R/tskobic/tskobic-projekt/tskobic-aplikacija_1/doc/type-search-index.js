@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"org.foi.nwtis.tskobic.aplikacija_1","l":"ServerGlavni.DretvaZahtjeva"},{"p":"org.foi.nwtis.tskobic.aplikacija_1","l":"ServerGlavni"}];updateSearchResults();

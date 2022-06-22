@@ -12,8 +12,18 @@ import java.util.logging.Logger;
 
 import org.foi.nwtis.tskobic.vjezba_06.konfiguracije.bazaPodataka.PostavkeBazaPodataka;
 
+/**
+ * Klasa GrupeDAO za rad s bazom s podataka.
+ */
 public class GrupeDAO {
 
+	/**
+	 * Dohvaća grupe korisnika.
+	 *
+	 * @param unos unos
+	 * @param pbp postavke baza podataka
+	 * @return lista grupa
+	 */
 	public List<Grupa> dohvatiGrupeKorisnika(String unos, PostavkeBazaPodataka pbp) {
 		String url = pbp.getServerDatabase() + pbp.getUserDatabase();
 		String bpkorisnik = pbp.getUserUsername();
