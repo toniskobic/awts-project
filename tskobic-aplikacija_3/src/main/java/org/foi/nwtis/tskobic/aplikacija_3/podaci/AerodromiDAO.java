@@ -24,7 +24,7 @@ public class AerodromiDAO {
 	 * Dohvaća sve aerodrome.
 	 *
 	 * @param pbp postavke baze podataka
-	 * @return the lista aerodroma
+	 * @return lista aerodroma
 	 */
 	public List<Aerodrom> dohvatiSveAerodrome(PostavkeBazaPodataka pbp) {
 		String url = pbp.getServerDatabase() + pbp.getUserDatabase();
@@ -69,7 +69,7 @@ public class AerodromiDAO {
 	 *
 	 * @param unos icao aerodroma
 	 * @param pbp postavke baze podataka
-	 * @return the aerodrom
+	 * @return aerodrom
 	 */
 	public Aerodrom dohvatiAerodrom(String unos, PostavkeBazaPodataka pbp) {
 		String url = pbp.getServerDatabase() + pbp.getUserDatabase();

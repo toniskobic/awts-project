@@ -14,8 +14,18 @@ import java.util.logging.Logger;
 import org.foi.nwtis.podaci.Korisnik;
 import org.foi.nwtis.tskobic.vjezba_06.konfiguracije.bazaPodataka.PostavkeBazaPodataka;
 
+/**
+ * Klasa KorisniciDAO za rad s bazom podataka.
+ */
 public class KorisniciDAO {
 
+	/**
+	 * Dohvaća korisnika.
+	 *
+	 * @param unos unos
+	 * @param pbp postavke baza podataka
+	 * @return korisnik
+	 */
 	public Korisnik dohvatiKorisnika(String unos, PostavkeBazaPodataka pbp) {
 		String url = pbp.getServerDatabase() + pbp.getUserDatabase();
 		String bpkorisnik = pbp.getUserUsername();
@@ -54,6 +64,12 @@ public class KorisniciDAO {
 		return null;
 	}
 	
+	/**
+	 * Dohvaća sve korisnike.
+	 *
+	 * @param pbp postavke baza podataka
+	 * @return lista korisnika
+	 */
 	public List<Korisnik> dohvatiSveKorisnike(PostavkeBazaPodataka pbp) {
 		String url = pbp.getServerDatabase() + pbp.getUserDatabase();
 		String bpkorisnik = pbp.getUserUsername();
@@ -91,6 +107,13 @@ public class KorisniciDAO {
 		return null;
 	}
 
+	/**
+	 * Dodaje korisnika.
+	 *
+	 * @param korisnik korisnik
+	 * @param pbp postavke baza podataka
+	 * @return true, ako je uspješno dodavanje
+	 */
 	public boolean dodajKorisnika(Korisnik korisnik, PostavkeBazaPodataka pbp) {
 		String url = pbp.getServerDatabase() + pbp.getUserDatabase();
 		String bpkorisnik = pbp.getUserUsername();
@@ -123,6 +146,14 @@ public class KorisniciDAO {
 		return false;
 	}
 
+	/**
+	 * Autentificira korisnika.
+	 *
+	 * @param korisnik korisnik
+	 * @param lozinka lozinka
+	 * @param pbp postavke baza podataka
+	 * @return true, ako je autentifikacija uspješna
+	 */
 	public boolean autentifikacijaKorisnika(String korisnik, String lozinka, PostavkeBazaPodataka pbp) {
 		String url = pbp.getServerDatabase() + pbp.getUserDatabase();
 		String bpkorisnik = pbp.getUserUsername();

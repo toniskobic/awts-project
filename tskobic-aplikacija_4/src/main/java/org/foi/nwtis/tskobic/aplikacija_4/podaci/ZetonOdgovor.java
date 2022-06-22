@@ -5,8 +5,15 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
+/**
+ * Klasa ZetonOdgovor.
+ *
+ * @param zeton žeton
+ * @param vrijeme vrijeme
+ */
 @AllArgsConstructor
 public class ZetonOdgovor {
+    
     @Getter
     @Setter
     private int zeton;

@@ -29,16 +29,23 @@ import jakarta.ws.rs.core.Context;
 @RequestScoped
 public class PregledKorisnika {
 
+	/** Žeton. */
 	public static ZetonOdgovor zeton;
+	
+	/** Korisničko ime. */
 	public static String korIme;
+	
+	/** Lozinka. */
 	public static String lozinka;
+	
+	/** Provjerava je li korisnik administrator. */
 	public static boolean admin;
 
-	/** kontekst servleta. */
+	/** Kontekst servleta. */
 	@Context
 	private ServletContext context;
 
-	/** model. */
+	/** Model. */
 	@Inject
 	private Models model;
 
@@ -60,6 +67,15 @@ public class PregledKorisnika {
 	public void registracija() {
 	}
 
+	/**
+	 * Obrada registracije.
+	 *
+	 * @param korIme korisničko ime
+	 * @param ime ime
+	 * @param prezime prezime
+	 * @param lozinka lozinka
+	 * @param email email
+	 */
 	@POST
 	@Path("registracija/rezultat")
 	@View("registracijaRezultat.jsp")
@@ -93,6 +109,12 @@ public class PregledKorisnika {
 	public void prijava() {
 	}
 
+	/**
+	 * Obrada prijave.
+	 *
+	 * @param korIme korisničko ime
+	 * @param lozinka lozinka
+	 */
 	@POST
 	@Path("prijava/rezultat")
 	@View("prijavaRezultat.jsp")

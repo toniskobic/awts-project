@@ -5,6 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Klasa Posluzitelj.
+ *
+ * @param adresa adresa
+ * @param port port
+ */
 @AllArgsConstructor
 public class Posluzitelj {
 

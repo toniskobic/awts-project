@@ -79,10 +79,11 @@ public class AerodromiDolasciDAO {
 	}
 
 	/**
-	 * Dodaje avion koji ste stigao na odredište.
+	 * Dodaje avion koji je stigao na odredište.
 	 *
 	 * @param al  klasa koja predstavlja avion koji je sletio
 	 * @param pbp postavke baze podataka
+	 * @param con veza na bazu podataka
 	 * @return true, ako je uspješno dodavanje
 	 */
 	public boolean dodajAerodromDolasci(AvionLeti al, PostavkeBazaPodataka pbp, Connection con) {

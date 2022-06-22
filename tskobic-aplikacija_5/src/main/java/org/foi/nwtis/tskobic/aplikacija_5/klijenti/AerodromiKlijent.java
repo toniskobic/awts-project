@@ -16,20 +16,34 @@ import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.Response;
 
+/**
+ * Klasa AerodromiKlijent koja preuzima podatke od REST APIa.
+ */
 public class AerodromiKlijent {
 
-	/** postavke baze podataka. */
+	/** Postavke baze podataka. */
 	PostavkeBazaPodataka konfig;
 
 	/**
 	 * Konstruktor.
 	 *
-	 * @param context kontekst servleta
+	 * @param konfig the konfig
 	 */
 	public AerodromiKlijent(PostavkeBazaPodataka konfig) {
 		this.konfig = konfig;
 	}
 
+	/**
+	 * Daje polaske aerodroma.
+	 *
+	 * @param korisnik korisnik
+	 * @param zeton žeton
+	 * @param icao icao
+	 * @param vrijemeOd vrijeme od
+	 * @param vrijemeDo vrijeme do
+	 * @param vrsta vrsta
+	 * @return lista polazaka
+	 */
 	public List<AvionLeti> dajPolaskeAerodroma(String korisnik, String zeton, String icao, String vrijemeOd,
 			String vrijemeDo, int vrsta) {
 		Client client = ClientBuilder.newClient();
@@ -51,6 +65,14 @@ public class AerodromiKlijent {
 		return aerodromPolasci;
 	}
 
+	/**
+	 * Dodaje aerodrom za preuzimanje.
+	 *
+	 * @param korisnik korisnik
+	 * @param zeton žeton
+	 * @param icao icao
+	 * @return true, ako je uspješno
+	 */
 	public boolean dodajAerodromPreuzimanje(String korisnik, String zeton, String icao) {
 		Client client = ClientBuilder.newClient();
 
@@ -71,6 +93,14 @@ public class AerodromiKlijent {
 		return dodan;
 	}
 
+	/**
+	 * Daje aerodrom.
+	 *
+	 * @param korisnik korisnik
+	 * @param zeton žeton
+	 * @param icao icao aerodroma
+	 * @return aerodrom
+	 */
 	public Aerodrom dajAerodrom(String korisnik, int zeton, String icao) {
 		Client client = ClientBuilder.newClient();
 
@@ -89,6 +119,13 @@ public class AerodromiKlijent {
 		return aerodrom;
 	}
 
+	/**
+	 * Daje praćene aerodrome.
+	 *
+	 * @param korisnik korisnik
+	 * @param zeton žeton
+	 * @return lista praćenih aerodroma
+	 */
 	public List<Aerodrom> dajPraceneAerodrome(String korisnik, String zeton) {
 		Client client = ClientBuilder.newClient();
 
@@ -107,5 +144,5 @@ public class AerodromiKlijent {
 
 		return aerodromi;
 	}
-
+	
 }

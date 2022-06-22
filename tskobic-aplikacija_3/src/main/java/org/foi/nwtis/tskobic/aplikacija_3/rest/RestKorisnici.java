@@ -25,12 +25,23 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+/**
+ * Klasa RestKorisnici za URI putanju korisnici.
+ */
 @Path("korisnici")
 public class RestKorisnici {
 
+	/** Kontekst servleta. */
 	@Context
 	private ServletContext context;
 
+	/**
+	 * Daje sve korisnike.
+	 *
+	 * @param korisnik korisnik
+	 * @param token žeton
+	 * @return odgovor
+	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response dajSveKorisnike(@HeaderParam("korisnik") String korisnik, @HeaderParam("zeton") String token) {
@@ -54,6 +65,14 @@ public class RestKorisnici {
 		return odgovor;
 	}
 
+	/**
+	 * Dodaje korisnika u bazu podataka.
+	 *
+	 * @param korisnik korisnik
+	 * @param token žeton
+	 * @param sadrzaj tijelo POST zahtjeva
+	 * @return odgovor
+	 */
 	@POST
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Consumes({ MediaType.APPLICATION_JSON })
@@ -84,6 +103,14 @@ public class RestKorisnici {
 		return odgovor;
 	}
 
+	/**
+	 * Daje korisnika.
+	 *
+	 * @param trazeniKorisnik traženi korisnik
+	 * @param korisnik korisnik koji je poslao HTTP zahtjev
+	 * @param token žeton
+	 * @return odgovor
+	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("{korisnik}")
@@ -108,6 +135,14 @@ public class RestKorisnici {
 		return odgovor;
 	}
 
+	/**
+	 * Daje grupe korisnika.
+	 *
+	 * @param proslijedjeniKorisnik proslijeđeni korisnik
+	 * @param korisnik korisnik koji je poslao HTTP zahtjev
+	 * @param token žeton
+	 * @return odgovor
+	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("{korisnik}/grupe")
@@ -134,6 +169,13 @@ public class RestKorisnici {
 		return odgovor;
 	}
 
+	/**
+	 * Provjerav žeton.
+	 *
+	 * @param zeton žeton
+	 * @param korisnik korisnik
+	 * @return odgovor
+	 */
 	private Response provjeriZeton(Zeton zeton, String korisnik) {
 		Response odgovor = null;
 
@@ -158,6 +200,12 @@ public class RestKorisnici {
 		return odgovor;
 	}
 
+	/**
+	 * Pretvara string u JSON formatu u objekt klase Korisnik.
+	 *
+	 * @param sadrzaj JSON format u stringu
+	 * @return korisnik
+	 */
 	private Korisnik pretvoriJSON(String sadrzaj) {
 		Gson gson = new Gson();
 

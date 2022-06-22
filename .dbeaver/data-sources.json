@@ -13,7 +13,8 @@
 				"database": "nwtis_bp_2",
 				"url": "jdbc:hsqldb:hsql://localhost:9002/nwtis_bp_2",
 				"type": "dev",
-				"auth-model": "native"
+				"auth-model": "native",
+				"handlers": {}
 			}
 		},
 		"mysql8-18158ed9a49-72e13030c954a209": {
@@ -85,8 +86,7 @@
 				"database": "nwtis_bp_2",
 				"url": "jdbc:hsqldb:hsql://localhost:9002/nwtis_bp_2",
 				"type": "dev",
-				"auth-model": "native",
-				"handlers": {}
+				"auth-model": "native"
 			}
 		}
 	},

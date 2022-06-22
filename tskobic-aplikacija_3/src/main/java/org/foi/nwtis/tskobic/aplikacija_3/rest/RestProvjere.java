@@ -25,12 +25,23 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+/**
+ * Klasa RestProvjere za URI putanju provjere.
+ */
 @Path("provjere")
 public class RestProvjere {
 
+	/** Kontekst servleta. */
 	@Context
 	private ServletContext context;
 
+	/**
+	 * Autentificira korisnika.
+	 *
+	 * @param korisnik korisnik
+	 * @param lozinka lozinka
+	 * @return odgovor
+	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response autentifikacijaKorisnika(@HeaderParam("korisnik") String korisnik,
@@ -55,6 +66,14 @@ public class RestProvjere {
 		return odgovor;
 	}
 
+	/**
+	 * Provjerava žeton.
+	 *
+	 * @param token žeton
+	 * @param korisnik korisnik
+	 * @param lozinka lozinka
+	 * @return odgovor
+	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("{token}")
@@ -90,6 +109,14 @@ public class RestProvjere {
 		return odgovor;
 	}
 
+	/**
+	 * Deaktivira žeton.
+	 *
+	 * @param token žeton
+	 * @param korisnik korisnik
+	 * @param lozinka lozinka
+	 * @return odgovor
+	 */
 	@DELETE
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("{token}")
@@ -123,6 +150,14 @@ public class RestProvjere {
 		return odgovor;
 	}
 
+	/**
+	 * Deaktivira žetone određenog korisnika.
+	 *
+	 * @param deaktivacijaKorisnik korisnik čiji se žetoni deaktiviraju
+	 * @param korisnik korisnik
+	 * @param lozinka lozinka
+	 * @return odgovor
+	 */
 	@DELETE
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("korisnik/{korisnik}")
@@ -169,6 +204,12 @@ public class RestProvjere {
 		return odgovor;
 	}
 
+	/**
+	 * Otvora vezu na bazu podataka.
+	 *
+	 * @return veza na bazu podataka
+	 * @throws SQLException SQL iznimka
+	 */
 	public Connection otvoriVezuBP() throws SQLException {
 		PostavkeBazaPodataka konfig = (PostavkeBazaPodataka) context.getAttribute("Postavke");
 		String url = konfig.getServerDatabase() + konfig.getUserDatabase();

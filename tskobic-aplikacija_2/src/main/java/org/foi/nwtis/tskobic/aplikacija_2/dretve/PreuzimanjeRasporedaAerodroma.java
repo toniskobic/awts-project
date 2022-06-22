@@ -28,61 +28,68 @@ import jakarta.servlet.ServletContext;
  */
 public class PreuzimanjeRasporedaAerodroma extends Thread {
 
-	boolean kraj = false;
+	/** Provjerava kraj rada poslužitelja. */
+	static boolean kraj = false;
 
+	/** Zadani odmak od trenutnog vremena. */
 	int preuzimanjeOdmak;
 
+	/** Pauza između dva aerodroma. */
 	int preuzimanjePauza;
 
-	/** datum od kojeg se počinje preuzimanje. */
+	/** Datum od kojeg se počinje preuzimanje. */
 	long preuzimanjeOd;
 
-	/** datum do kojeg se preuzimaju podaci. */
+	/** Datum do kojeg se preuzimaju podaci. */
 	long preuzimanjeDo;
 	
-	/** vrijeme obrade. */
+	/** Vrijeme od kojeg se preuzimaju podaci za svaki ciklus. */
 	long vrijemeObrade;
 
-	/** vrijeme za koje se preuzimaju podaci u jednom ciklusu */
+	/**  vrijeme za koje se preuzimaju podaci u jednom ciklusu. */
 	int preuzimanjeVrijeme;
 
+	/** Trenutni datum. */
 	long trenutniDatum;
 
+	/** Korekcija trenutno datuma. */
 	long trenutniDatumKorekcija;
 	
+	/** Vrijeme trajanja jednog ciklusa. */
 	int ciklusVrijeme;
 
+	/** Broj ciklusa u kojem će se obaviti korekcija vremena spavanja. */
 	int ciklusKorekcija;
 
-	/** aerodromi praceni DAO. */
+	/** Aerodromi praceni DAO. */
 	AerodromiPraceniDAO aerodromiPraceniDAO;
 
-	/** aerodromi polasci DAO. */
+	/** Aerodromi polasci DAO. */
 	AerodromiPolasciDAO aerodromiPolasciDAO;
 
-	/** aerodromi dolasci DAO. */
+	/** Aerodromi dolasci DAO. */
 	AerodromiDolasciDAO aerodromiDolasciDAO;
 
-	/** aerodromi problemi DAO. */
+	/** Aerodromi problemi DAO. */
 	AerodromiProblemiDAO aerodromiProblemiDAO;
 
-	/** korisnik. */
+	/** Korisnik. */
 	String korisnik;
 
-	/** lozinka. */
+	/** Lozinka. */
 	String lozinka;
 
 	/** OpenSkyNewtork klijent. */
 	OSKlijent oSKlijent;
 
-	/** kontekst servleta. */
+	/** Kontekst servleta. */
 	ServletContext context;
 
-	/** postavke baze podataka. */
+	/** Postavke baze podataka. */
 	PostavkeBazaPodataka konfig;
 
 	/**
-	 * Konstruktor dretve
+	 * Konstruktor dretve.
 	 *
 	 * @param context kontekst servleta
 	 */
@@ -92,7 +99,7 @@ public class PreuzimanjeRasporedaAerodroma extends Thread {
 	}
 
 	/**
-	 * Metoda za pokretanje dretve
+	 * Metoda za pokretanje dretve.
 	 */
 	@Override
 	public synchronized void start() {
@@ -119,7 +126,7 @@ public class PreuzimanjeRasporedaAerodroma extends Thread {
 	}
 
 	/**
-	 * Glavna metoda za rad dretve
+	 * Glavna metoda za rad dretve.
 	 */
 	@Override
 	public void run() {
@@ -245,7 +252,7 @@ public class PreuzimanjeRasporedaAerodroma extends Thread {
 	}
 
 	/**
-	 * Pretvara datum iz stringa u sekunde
+	 * Pretvara datum iz stringa u broj milisekunda od 1.1.1970.
 	 *
 	 * @param datum datum
 	 * @return the long
@@ -263,6 +270,12 @@ public class PreuzimanjeRasporedaAerodroma extends Thread {
 		return milisekunde;
 	}
 
+	/**
+	 * Izračunava broj ciklusa.
+	 *
+	 * @param efektivnoVrijeme efektivno vrijeme
+	 * @return the int
+	 */
 	public int izracunajCiklus(long efektivnoVrijeme) {
 		int i = 1;
 
@@ -273,6 +286,12 @@ public class PreuzimanjeRasporedaAerodroma extends Thread {
 		return i;
 	}
 
+	/**
+	 * Otvara vezu prema bazi podataka.
+	 *
+	 * @return the veza na bazu podataka
+	 * @throws SQLException SQL iznimka
+	 */
 	public Connection otvoriVezuBP() throws SQLException {
 		String url = konfig.getServerDatabase() + konfig.getUserDatabase();
 		String bpkorisnik = konfig.getUserUsername();
